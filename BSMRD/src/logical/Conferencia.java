@@ -60,7 +60,7 @@ public class Conferencia {
 	}
 	
 	public ArrayList<Juego> getJuegosDelDia() {
-		return this.getJuegos(new FechaSimple());
+		return this.getJuegos(FechaSimple.getInstance());
 
 	}
 	public ArrayList<Jugador> getMisJugadores() {
