@@ -5,12 +5,12 @@ import java.util.Calendar;
 public class Lesion {
 	private String tipoLesion;
 	private int gradoLesion;
-	private Calendar fechaInicio;
+	private FechaSimple fechaInicio;
 	private int tiempoLesionado;
-	private Calendar fechaRegreso;
+	private FechaSimple fechaRegreso;
 	private String descripcion;
 	private boolean activa;
-	public Lesion(String tipoLesion, int gradoLesion, Calendar fechaInicio, int tiempoLesionado, Calendar fechaRegreso,
+	public Lesion(String tipoLesion, int gradoLesion, FechaSimple fechaInicio, int tiempoLesionado, FechaSimple fechaRegreso,
 			String descripcion, boolean activa) {
 		super();
 		this.tipoLesion = tipoLesion;
@@ -33,10 +33,10 @@ public class Lesion {
 	public void setGradoLesion(int gradoLesion) {
 		this.gradoLesion = gradoLesion;
 	}
-	public Calendar getFechaInicio() {
+	public FechaSimple getFechaInicio() {
 		return fechaInicio;
 	}
-	public void setFechaInicio(Calendar fechaInicio) {
+	public void setFechaInicio(FechaSimple fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 	public int getTiempoLesionado() {
@@ -45,10 +45,10 @@ public class Lesion {
 	public void setTiempoLesionado(int tiempoLesionado) {
 		this.tiempoLesionado = tiempoLesionado;
 	}
-	public Calendar getFechaRegreso() {
+	public FechaSimple getFechaRegreso() {
 		return fechaRegreso;
 	}
-	public void setFechaRegreso(Calendar fechaRegreso) {
+	public void setFechaRegreso(FechaSimple fechaRegreso) {
 		this.fechaRegreso = fechaRegreso;
 	}
 	public String getDescripcion() {
