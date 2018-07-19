@@ -10,6 +10,16 @@ public class Equipo {
 	private int juegosGanados; 
 	private int juegosPerdidos; 
 	private String estadio;
+	public Equipo(String nombre, String entrenador, float presupuesto, String estadio) {
+		super();
+		this.nombre = nombre;
+		this.estadio = estadio;
+		this.entrenador = entrenador;
+		this.presupuesto = presupuesto;
+		this.misJugadores = new ArrayList<>();
+		this.juegosGanados = 0;
+		this.juegosPerdidos = 0;
+	}
 	public Equipo(String nombre, ArrayList<Jugador> misJugadores, String entrenador, float presupuesto,
 			int juegosGanados, int juegosPerdidos, String estadio) {
 		super();
