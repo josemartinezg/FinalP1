@@ -11,12 +11,10 @@ public class Estadistica {
 	private int intentosTirosLibres;
 	private int intentosDeCampo;
 	private int intentosDeTres;
-	private int numeroCamiseta;
-	private float estatura;
-	private float peso;
+	
 	//Añadir foto. 
 	
-	public Estadistica(int numeroCamiseta, float estatura, float peso) {
+	public Estadistica() {
 		super();
 		tirosLibres = 0;
 		puntosDeCampo = 0;
@@ -27,9 +25,6 @@ public class Estadistica {
 		intentosTirosLibres = 0;
 		intentosDeCampo = 0;
 		intentosDeTres = 0;
-		this.numeroCamiseta = numeroCamiseta;
-		this.estatura = estatura;
-		this.peso = peso;
 	}
 
 	public int getTirosLibres() {
@@ -93,24 +88,6 @@ public class Estadistica {
 	}
 	public void setIntentosDeTres(int intentosDeTres) {
 		this.intentosDeTres = intentosDeTres;
-	}
-	public int getNumeroCamiseta() {
-		return numeroCamiseta;
-	}
-	public void setNumeroCamiseta(int numeroCamiseta) {
-		this.numeroCamiseta = numeroCamiseta;
-	}
-	public float getEstatura() {
-		return estatura;
-	}
-	public void setEstatura(float estatura) {
-		this.estatura = estatura;
-	}
-	public float getPeso() {
-		return peso;
-	}
-	public void setPeso(float peso) {
-		this.peso = peso;
 	}
 	/*
 	 * Llamar desde pantalla del tablero o simulación del juego.

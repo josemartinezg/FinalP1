@@ -12,9 +12,12 @@ public class Jugador {
 	private boolean lesionado;
 	private ArrayList<Lesion> misLesiones;
 	private Estadistica estadisticas;
+	private int numeroCamiseta;
+	private float estatura;
+	private float peso;
 	
 	public Jugador(String nombre, String apellido, String iD, FechaSimple fechaNacimiento, float salarioAnual,
-			String ligaProveniente, boolean lesionado, Estadistica estadisticas) {
+			String ligaProveniente, boolean lesionado, Estadistica estadisticas, int numeroCamiseta, float estatura, float peso) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -24,6 +27,9 @@ public class Jugador {
 		this.ligaProveniente = ligaProveniente;
 		this.lesionado = lesionado;
 		this.estadisticas = estadisticas;
+		this.numeroCamiseta = numeroCamiseta;
+		this.estatura = estatura;
+		this.peso = peso;
 	}
 	public String getNombre() {
 		return nombre;
@@ -69,6 +75,24 @@ public class Jugador {
 	}
 	public ArrayList<Lesion> getMisLesiones() {
 		return misLesiones;
+	}
+	public int getNumeroCamiseta() {
+		return numeroCamiseta;
+	}
+	public void setNumeroCamiseta(int numeroCamiseta) {
+		this.numeroCamiseta = numeroCamiseta;
+	}
+	public float getEstatura() {
+		return estatura;
+	}
+	public void setEstatura(float estatura) {
+		this.estatura = estatura;
+	}
+	public float getPeso() {
+		return peso;
+	}
+	public void setPeso(float peso) {
+		this.peso = peso;
 	}
 	public void agregarLesion(Lesion lesion) {
 		if(lesion.isActiva()) {
