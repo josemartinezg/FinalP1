@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -28,24 +29,42 @@ public class RegistroJugadores extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtPeso;
-	private JTextField txtLnbsas;
+	private JTextField txtID;
 	private JTextField txtSalario;
 	private JComboBox cbxEquipo;
 	private JSpinner spnEstatura;
 	private JComboBox cbxLigaOrigen;
 	private JTextField txtNumeroCamiseta;
 	private JTextField txtFechaNacimiento;
+	private Jugador jugador;
 
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+	try {
+		RegistroJugadores dialog = new RegistroJugadores(null);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
 
 	/**
 	 * Create the dialog.
 	 */
-	public RegistroJugadores() {
-		setTitle("Registro de Jugadores");
+	/*Pasar el equipo por constructor al momento de crear el equipo(?), 
+	 * y no pasar nada al momento de agregarlo independientemente*/
+	public RegistroJugadores(Jugador jugador) {
+		this.jugador = jugador;
+		setModal(true);
+		if ( jugador == null) {
+			setTitle("Registro de Jugadores");
+		}else {
+			setTitle("Modificación de Jugadores");
+		}
+		
 		setBounds(100, 100, 512, 635);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -60,7 +79,7 @@ public class RegistroJugadores extends JDialog {
 		
 		cbxEquipo = new JComboBox();
 		cbxEquipo.setBounds(12, 56, 467, 22);
-		cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>"}));
+		cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>", "Golden State Warriors", "San Antonio Spurs"}));
 		contentPanel.add(cbxEquipo);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -99,6 +118,7 @@ public class RegistroJugadores extends JDialog {
 		contentPanel.add(lblPeso);
 		
 		txtPeso = new JTextField();
+		txtPeso.setText("0.00");
 		txtPeso.setBounds(249, 243, 116, 22);
 		contentPanel.add(txtPeso);
 		txtPeso.setColumns(10);
@@ -108,13 +128,19 @@ public class RegistroJugadores extends JDialog {
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPanel.add(lblId);
 		
-		txtLnbsas = new JTextField();
-		txtLnbsas.setBounds(12, 487, 149, 22);
-		txtLnbsas.setText("LNBSAS0001");
-		txtLnbsas.setEditable(false);
-		txtLnbsas.setEnabled(false);
-		contentPanel.add(txtLnbsas);
-		txtLnbsas.setColumns(10);
+		txtID = new JTextField();
+		txtID.setBounds(12, 487, 149, 22);
+		txtID.setText("LNBSAS0001");
+		txtID.setEditable(false);
+		txtID.setEnabled(false);
+		if (jugador != null) {
+			txtID.setEnabled(false);
+			txtID.setEditable(false);
+			txtID.setText(jugador.getiD());
+		}
+		contentPanel.add(txtID);
+		txtID.setColumns(10);
+		
 		
 		JLabel lblSalario = new JLabel("Salario:");
 		lblSalario.setBounds(12, 403, 83, 16);
@@ -122,6 +148,7 @@ public class RegistroJugadores extends JDialog {
 		contentPanel.add(lblSalario);
 		
 		txtSalario = new JTextField();
+		txtSalario.setText("00000.00");
 		txtSalario.setBounds(12, 427, 149, 22);
 		contentPanel.add(txtSalario);
 		txtSalario.setColumns(10);
@@ -147,6 +174,7 @@ public class RegistroJugadores extends JDialog {
 		contentPanel.add(comboBox_2);
 		
 		txtNumeroCamiseta = new JTextField();
+		txtNumeroCamiseta.setText("0");
 		txtNumeroCamiseta.setBounds(12, 368, 149, 22);
 		txtNumeroCamiseta.setColumns(10);
 		contentPanel.add(txtNumeroCamiseta);
@@ -163,11 +191,18 @@ public class RegistroJugadores extends JDialog {
 		
 		txtFechaNacimiento = new JTextField();
 		txtFechaNacimiento.setBounds(12, 308, 144, 22);
-		txtFechaNacimiento.setText("DD/MM/AAAA");
+		txtFechaNacimiento.setText("31/12/1999");
 		txtFechaNacimiento.setColumns(10);
 		contentPanel.add(txtFechaNacimiento);
 		
 		JButton btnImage = new JButton("Cargar Foto");
+		btnImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SeleccionImagen selImg = new SeleccionImagen();
+				selImg.setVisible(true);
+				selImg.setModal(false);
+			}
+		});
 		btnImage.setBounds(249, 290, 220, 219);
 		contentPanel.add(btnImage);
 		{
@@ -175,16 +210,23 @@ public class RegistroJugadores extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnRegistrar = new JButton("Registrar");
+				JButton btnRegistrar = new JButton("");
+				if ( jugador == null ) {
+					btnRegistrar.setText("Registrar");
+				}else {
+					btnRegistrar.setText("Modificar");
+				}
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					String nombre = txtNombre.getText();
 					String apellido = txtApellido.getText();
+					String equipo = cbxEquipo.getSelectedItem().toString();
 					Float peso = Float.valueOf(txtPeso.getText());
 					float salarioAnual = Float.valueOf(txtSalario.getText());
 					String estatura = spnEstatura.getValue().toString();
 					Float fEstatura = Float.valueOf(estatura.substring(0, estatura.indexOf("'")));
-					String ligaProveniente = cbxLigaOrigen.toString();
+					String ligaProveniente = cbxLigaOrigen.getSelectedItem().toString();
+					//Add numeric exception.
 					int numeroCamiseta = Integer.valueOf(txtNumeroCamiseta.getText());
 					String iD = generateID(nombre, numeroCamiseta);
 					String fechaNacim = txtFechaNacimiento.getText();
@@ -194,17 +236,30 @@ public class RegistroJugadores extends JDialog {
 					int anno = Integer.valueOf(fecha[2]);
 					FechaSimple fechaNacimiento = new FechaSimple(dia, mes, anno);
 					Estadistica estadisticas = new Estadistica();
-					try {
-						
-					}catch(NumberFormatException e2) {
-						System.out.println("Number Format exception caught.");
-					}
-					try {
-						Jugador nuevoJugador = new Jugador(nombre, apellido, iD, fechaNacimiento, salarioAnual, ligaProveniente, false, estadisticas, numeroCamiseta, fEstatura, peso);
-						Conferencia.getInstance().getMisJugadores().add(nuevoJugador);
-					}catch(NullPointerException e1) {
-						System.out.println("Null pointer exception caught.");
-					}
+					if (nombre.equalsIgnoreCase("") || apellido.equalsIgnoreCase("") ||  ligaProveniente.equalsIgnoreCase("") ||  iD.equalsIgnoreCase("") ||  
+							fechaNacim.equalsIgnoreCase("") || peso == 0.0 || (numeroCamiseta < 0 && numeroCamiseta > 100) || salarioAnual == 0.0
+							|| equipo.equalsIgnoreCase("<Seleccione un equipo>")) {
+						JOptionPane.showMessageDialog(null, "El jugador no pudo ser creado.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
+						}else {
+							if (jugador == null) {
+								Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, false, estadisticas, numeroCamiseta, fEstatura, peso, null);
+								JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
+								System.out.println(nombre + " " + apellido  + " " + equipo   + " " + iD  + " " + fechaNacim   + " " + salarioAnual   + " " + 
+								ligaProveniente  + " " + numeroCamiseta   + " " + fEstatura   + " " + peso);
+							}else {
+								jugador.setiD(jugador.getiD());
+								jugador.setNombre(nombre);
+								jugador.setApellido(apellido);
+								jugador.setPeso(peso);
+								jugador.setSalarioAnual(salarioAnual);
+								jugador.setEstatura(fEstatura);
+								jugador.setLigaProveniente(ligaProveniente);
+								jugador.setNumeroCamiseta(numeroCamiseta);
+								jugador.setFechaNacimiento(fechaNacimiento);
+								Conferencia.getInstance().modficarJugador(jugador);
+								JOptionPane.showMessageDialog(null, "Jugador modificado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
+							}
+						}
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
@@ -212,9 +267,14 @@ public class RegistroJugadores extends JDialog {
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton btnSaliur = new JButton("Salir");
-				btnSaliur.setActionCommand("Cancel");
-				buttonPane.add(btnSaliur);
+				JButton btnSalir = new JButton("Salir");
+				btnSalir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+				btnSalir.setActionCommand("Cancel");
+				buttonPane.add(btnSalir);
 			}
 		}
 	}
@@ -230,7 +290,7 @@ public class RegistroJugadores extends JDialog {
 	private String generateID(String nombre, int numero) {
 		String iD = null;
 		
-		iD = "LNB" + nombre.substring(0, 2) + nombre.substring(nombre.indexOf(" "), (nombre.indexOf(" ")+2)) + Integer.toString(numero);
+		iD = "LNB" + /*nombre.substring(0, 2) + nombre.substring(nombre.indexOf(" "), (nombre.indexOf(" ")+2)) +*/ Integer.toString(numero);
 		
 		return iD;
 	}
