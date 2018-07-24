@@ -6,11 +6,11 @@ public class Lesion {
 	private String tipoLesion;
 	private int gradoLesion;
 	private FechaSimple fechaInicio;
-	private int tiempoLesionado;
+	private String tiempoLesionado;
 	private FechaSimple fechaRegreso;
 	private String descripcion;
 	private boolean activa;
-	public Lesion(String tipoLesion, int gradoLesion, FechaSimple fechaInicio, int tiempoLesionado, FechaSimple fechaRegreso,
+	public Lesion(String tipoLesion, int gradoLesion, FechaSimple fechaInicio, String tiempoLesionado, FechaSimple fechaRegreso,
 			String descripcion, boolean activa) {
 		super();
 		this.tipoLesion = tipoLesion;
@@ -39,10 +39,10 @@ public class Lesion {
 	public void setFechaInicio(FechaSimple fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	public int getTiempoLesionado() {
+	public String getTiempoLesionado() {
 		return tiempoLesionado;
 	}
-	public void setTiempoLesionado(int tiempoLesionado) {
+	public void setTiempoLesionado(String tiempoLesionado) {
 		this.tiempoLesionado = tiempoLesionado;
 	}
 	public FechaSimple getFechaRegreso() {
