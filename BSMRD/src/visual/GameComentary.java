@@ -90,7 +90,9 @@ public class GameComentary extends JDialog {
 	
 	public GameComentary(int quarterDuration) {
 		setBounds(100, 100, 1103, 578);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
