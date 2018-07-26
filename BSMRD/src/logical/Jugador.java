@@ -2,9 +2,12 @@ package logical;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Jugador {
 	private String nombre; 
 	private String apellido;
+	private String equipo;
 	private String iD;
 	private FechaSimple fechaNacimiento;
 	private float salarioAnual;
@@ -15,12 +18,16 @@ public class Jugador {
 	private int numeroCamiseta;
 	private float estatura;
 	private float peso;
+	private ImageIcon fotoPersonal;
 	
-	public Jugador(String nombre, String apellido, String iD, FechaSimple fechaNacimiento, float salarioAnual,
-			String ligaProveniente, boolean lesionado, Estadistica estadisticas, int numeroCamiseta, float estatura, float peso) {
+	
+	public Jugador(String nombre, String apellido, String equipo, String iD, FechaSimple fechaNacimiento, float salarioAnual,
+			String ligaProveniente, boolean lesionado, Estadistica estadisticas, int numeroCamiseta, float estatura, float peso,
+			ImageIcon foto) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.equipo = equipo;
 		this.iD = iD;
 		this.fechaNacimiento = fechaNacimiento;
 		this.salarioAnual = salarioAnual;
@@ -30,6 +37,7 @@ public class Jugador {
 		this.numeroCamiseta = numeroCamiseta;
 		this.estatura = estatura;
 		this.peso = peso;
+		this.fotoPersonal = foto;
 	}
 	public String getNombre() {
 		return nombre;
@@ -113,4 +121,16 @@ public class Jugador {
 	public void setEstadisticas(Estadistica estadisticas) {
 		this.estadisticas = estadisticas;
 	}
+	public String getEquipo() {
+		return equipo;
+	}
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
+	public ImageIcon getFotoPersonal() {
+		return fotoPersonal;
+	}
+	public void setFotoPersonal(ImageIcon fotoPersonal) {
+		this.fotoPersonal = fotoPersonal;
+	}	
 }

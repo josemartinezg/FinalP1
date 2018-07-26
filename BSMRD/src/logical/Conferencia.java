@@ -70,5 +70,13 @@ public class Conferencia {
 		this.misJugadores = misJugadores;
 	}
 
+	public void modficarJugador(Jugador jugador) {
+		int ind = misJugadores.indexOf(jugador);
+		misJugadores.set(ind, jugador);
+	}
+	public void addJugador(Jugador nuevoJugador) {
+		misJugadores.add(nuevoJugador);
+	}
+
 }
 
