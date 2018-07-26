@@ -76,5 +76,9 @@ public class Conferencia {
 		
 	}
 
+	public void addJugador(Jugador nuevoJugador) {
+		misJugadores.add(nuevoJugador);
+	}
+
 }
 

@@ -264,6 +264,7 @@ public class RegistroJugadores extends JDialog {
 							}else {
 								if (jugador == null) {
 									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, false, estadisticas, numeroCamiseta, fEstatura, peso, null);
+									Conferencia.getInstance().addJugador(nuevoJugador);
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
 									System.out.println(nombre + " " + apellido  + " " + equipo   + " " + iD  + " " + dia+"/"+mes+"/"+anno   + " " + salarioAnual   + " " +
 									ligaProveniente  + " " + numeroCamiseta   + " " + fEstatura   + " " + peso);
