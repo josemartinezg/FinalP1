@@ -19,13 +19,11 @@ public class Conferencia {
 		return juegos;
 	}
 	
-	public ArrayList<Juego> getJuegos(FechaSimple fecha) {
+	public ArrayList<Juego> getJuegos(FechaSimple fecha, boolean ocurrido) {
 		ArrayList<Juego> aux = new ArrayList<Juego>();
 		for (Juego jg : juegos) {
 			FechaSimple fechaJuego = jg.getFecha();
-			if (fechaJuego.getMonth() == fecha.getMonth() &&
-				fechaJuego.getYear() == fecha.getYear() &&
-				fechaJuego.getDay() == fecha.getDay()) {
+			if (fechaJuego.isEqual(fecha)) {
 				aux.add(jg);
 			}
 		}
@@ -60,7 +58,7 @@ public class Conferencia {
 	}
 	
 	public ArrayList<Juego> getJuegosDelDia() {
-		return this.getJuegos(FechaSimple.getInstance());
+		return this.getJuegos(FechaSimple.getInstance(), false);
 
 	}
 	public ArrayList<Jugador> getMisJugadores() {

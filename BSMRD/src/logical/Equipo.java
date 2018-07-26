@@ -2,21 +2,24 @@ package logical;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Equipo {
 	private String nombre;
-	private  ArrayList<Jugador> misJugadores;
+	private  ArrayList<Jugador> jugadores;
 	private String entrenador; 
 	private float presupuesto;
 	private int juegosGanados; 
 	private int juegosPerdidos; 
 	private String estadio;
+	private ImageIcon logo;
 	public Equipo(String nombre, String entrenador, float presupuesto, String estadio) {
 		super();
 		this.nombre = nombre;
 		this.estadio = estadio;
 		this.entrenador = entrenador;
 		this.presupuesto = presupuesto;
-		this.misJugadores = new ArrayList<>();
+		this.jugadores = new ArrayList<>();
 		this.juegosGanados = 0;
 		this.juegosPerdidos = 0;
 	}
@@ -24,11 +27,21 @@ public class Equipo {
 			int juegosGanados, int juegosPerdidos, String estadio) {
 		super();
 		this.nombre = nombre;
-		this.misJugadores = misJugadores;
+		this.jugadores = misJugadores;
 		this.entrenador = entrenador;
 		this.presupuesto = presupuesto;
 		this.juegosGanados = juegosGanados;
 		this.juegosPerdidos = juegosPerdidos;
+		this.estadio = estadio;
+	}
+	public Equipo(String nombre, String entrenador, String estadio) {
+		super();
+		this.nombre = nombre;
+		this.jugadores = new ArrayList<>();
+		this.entrenador = entrenador;
+		this.presupuesto = 0;
+		this.juegosGanados = 0;
+		this.juegosPerdidos = 0;
 		this.estadio = estadio;
 	}
 	public String getNombre() {
@@ -37,11 +50,11 @@ public class Equipo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public ArrayList<Jugador> getMisJugadores() {
-		return misJugadores;
+	public ArrayList<Jugador> getJugadores() {
+		return jugadores;
 	}
-	public void setMisJugadores(ArrayList<Jugador> misJugadores) {
-		this.misJugadores = misJugadores;
+	public void setJugadores(ArrayList<Jugador> jugadores) {
+		this.jugadores = jugadores;
 	}
 	public String getEntrenador() {
 		return entrenador;
@@ -72,5 +85,14 @@ public class Equipo {
 	}
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
-	} 
+	}
+	public void addJugador(Jugador jugador) {
+		this.jugadores.add(jugador);
+	}
+	public ImageIcon getLogo() {
+		return logo;
+	}
+	public void setLogo(ImageIcon logo) {
+		this.logo = logo;
+	}
 }
