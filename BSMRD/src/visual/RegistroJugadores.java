@@ -44,6 +44,7 @@ public class RegistroJugadores extends JDialog {
 	private Jugador jugador;
 	private boolean lesionStatus = false;
 	private String tipoLesion = null;
+	private SeleccionImagen selImg = new SeleccionImagen();
 	private DefaultComboBoxModel modeloLesiones =
 			new DefaultComboBoxModel(new String[] {"<Sin Lesi\u00F3n>", "Lesi\u00F3n Grado 1", "Lesi\u00F3n Grado 2", "Lesi\u00F3n Grado 3", "Lesi\u00F3n Grado 4", "Lesi\u00F3n Grado 5"});
 	
@@ -68,7 +69,6 @@ public class RegistroJugadores extends JDialog {
 	 * y no pasar nada al momento de agregarlo independientemente*/
 	public RegistroJugadores(Jugador jugador) {
 		this.jugador = jugador;
-		setModal(true);
 		if ( jugador == null) {
 			setTitle("Registro de Jugadores");
 		}else {
@@ -210,20 +210,19 @@ public class RegistroJugadores extends JDialog {
 		lblEstatura.setBounds(249, 214, 83, 16);
 		contentPanel.add(lblEstatura);
 		
-		JLabel lblNewLabel = new JLabel("Cargar Foto");
-		lblNewLabel.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), Color.GRAY, null, null));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 31));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.addMouseListener(new MouseAdapter() {
+		JLabel lblCambiarFoto = new JLabel("Cargar Foto");
+		lblCambiarFoto.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), Color.GRAY, null, null));
+		lblCambiarFoto.setFont(new Font("Tahoma", Font.PLAIN, 31));
+		lblCambiarFoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCambiarFoto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SeleccionImagen selImg = new SeleccionImagen();
 				selImg.setVisible(true);
 				selImg.setModal(true);
 			}
 		});
-		lblNewLabel.setBounds(249, 290, 220, 219);
-		contentPanel.add(lblNewLabel);
+		lblCambiarFoto.setBounds(249, 290, 220, 219);
+		contentPanel.add(lblCambiarFoto);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -266,8 +265,6 @@ public class RegistroJugadores extends JDialog {
 									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, false, estadisticas, numeroCamiseta, fEstatura, peso, null);
 									Conferencia.getInstance().addJugador(nuevoJugador);
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
-									System.out.println(nombre + " " + apellido  + " " + equipo   + " " + iD  + " " + dia+"/"+mes+"/"+anno   + " " + salarioAnual   + " " +
-									ligaProveniente  + " " + numeroCamiseta   + " " + fEstatura   + " " + peso);
 									clean();
 									if ( lesionStatus == true ) {
 										ControlLesiones ctrlLesion = new ControlLesiones(nuevoJugador, modeloLesiones, tipoLesion);

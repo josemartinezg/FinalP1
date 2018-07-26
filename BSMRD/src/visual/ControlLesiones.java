@@ -33,23 +33,6 @@ public class ControlLesiones extends JDialog {
 	private JTextField txtID;
 	JComboBox cbxTiempoDeDesahibilitado;
 	private Jugador jugador;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		try {
-			ControlLesiones dialog = new ControlLesiones();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-
-	/**
-	 * Create the dialog.
-	 */
 	public ControlLesiones(Jugador jugador, DefaultComboBoxModel modelLesion, String tipoLesion) {
 		this.jugador = jugador;
 		setTitle("Control de Lesiones");

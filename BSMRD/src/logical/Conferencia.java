@@ -72,10 +72,8 @@ public class Conferencia {
 
 	public void modficarJugador(Jugador jugador) {
 		int ind = misJugadores.indexOf(jugador);
-		misJugadores.set(ind, jugador);// TODO Auto-generated method stub
-		
+		misJugadores.set(ind, jugador);
 	}
-
 	public void addJugador(Jugador nuevoJugador) {
 		misJugadores.add(nuevoJugador);
 	}
