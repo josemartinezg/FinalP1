@@ -254,7 +254,6 @@ public class RegistroJugadores extends JDialog {
 						int mes = Integer.valueOf(cbxMes.getSelectedItem().toString());
 						int anno = Integer.valueOf(cbxAnno.getSelectedItem().toString());
 						FechaSimple fechaNacimiento = new FechaSimple(dia, mes, anno);
-						Estadistica estadisticas = new Estadistica();
 						lesionStatus = activarLesion();
 						tipoLesion = getTipoLesion();
 						if (nombre.equalsIgnoreCase("") || apellido.equalsIgnoreCase("") ||  ligaProveniente.equalsIgnoreCase("") ||  iD.equalsIgnoreCase("") ||  
@@ -262,7 +261,7 @@ public class RegistroJugadores extends JDialog {
 							JOptionPane.showMessageDialog(null, "El jugador no pudo ser creado.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
 							}else {
 								if (jugador == null) {
-									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, false, estadisticas, numeroCamiseta, fEstatura, peso, null);
+									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, lesionStatus, numeroCamiseta, fEstatura, peso, null);
 									Conferencia.getInstance().addJugador(nuevoJugador);
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
 									clean();

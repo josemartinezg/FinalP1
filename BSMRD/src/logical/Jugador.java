@@ -22,7 +22,7 @@ public class Jugador {
 	
 	
 	public Jugador(String nombre, String apellido, String equipo, String iD, FechaSimple fechaNacimiento, float salarioAnual,
-			String ligaProveniente, boolean lesionado, Estadistica estadisticas, int numeroCamiseta, float estatura, float peso,
+			String ligaProveniente, boolean lesionado, int numeroCamiseta, float estatura, float peso,
 			ImageIcon foto) {
 		super();
 		this.nombre = nombre;
@@ -33,7 +33,7 @@ public class Jugador {
 		this.salarioAnual = salarioAnual;
 		this.ligaProveniente = ligaProveniente;
 		this.lesionado = lesionado;
-		this.estadisticas = estadisticas;
+		this.estadisticas = new Estadistica();
 		this.numeroCamiseta = numeroCamiseta;
 		this.estatura = estatura;
 		this.peso = peso;
