@@ -114,10 +114,11 @@ public class RegEquipo extends JDialog {
 							String estadio = txtEstadio.getText().toString();
 							String entrenador = txtEntrenador.getText().toString();
 							float presupuesto = Float.parseFloat(spnPresupuesto.getValue().toString());
+							String iD = generateID(nombre);
 							if(nombre.isEmpty() | estadio.isEmpty() | entrenador.isEmpty()) {
 								throw new Exception();
 							}
-							Equipo equipo = new Equipo(nombre, entrenador, presupuesto, estadio);
+							Equipo equipo = new Equipo(nombre, entrenador, presupuesto, estadio, iD);
 							Conferencia.getInstance().insertEquipo(equipo);
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria.", "Información", JOptionPane.INFORMATION_MESSAGE);
 							clear();
@@ -148,5 +149,13 @@ public class RegEquipo extends JDialog {
 		txtEntrenador.setText("");
 		txtEstadio.setText("");
 		spnPresupuesto.setValue(1000.0);
+	}
+	
+	private String generateID(String nombre) {
+		String iD = null;
+		
+		iD = nombre.substring(0, 1) + nombre.substring(nombre.indexOf(" ")+1, (nombre.indexOf(" ")+2));
+		
+		return iD;
 	}
 }

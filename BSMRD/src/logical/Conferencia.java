@@ -76,5 +76,33 @@ public class Conferencia {
 		misJugadores.add(nuevoJugador);
 	}
 
+	public Jugador buscarJugadores(String iD) {
+		Jugador aux = null;
+		boolean found = false;
+		int ind = 0;
+		while ( ind < misJugadores.size() && !found ) {
+			if ( misJugadores.get(ind).getiD().equalsIgnoreCase(iD) ) {
+				aux = misJugadores.get(ind);
+				found = true;
+			}
+			ind++;
+		}
+		return aux;
+	}
+
+	public Equipo buscarEquipos(String iD) {
+		Equipo aux = null;
+		boolean found = false;
+		int ind = 0;
+		while ( ind < equipos.size() && !found ) {
+			if ( equipos.get(ind).getiD().equalsIgnoreCase(iD) ) {
+				aux = equipos.get(ind);
+				found = true;
+			}
+			ind++;
+		}
+		return aux;
+	}
+
 }
 

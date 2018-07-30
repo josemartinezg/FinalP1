@@ -2,22 +2,23 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import logical.Conferencia;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import logical.Jugador;
 
 public class VerJugadores extends JDialog {
 
@@ -65,7 +66,7 @@ public class VerJugadores extends JDialog {
 					btnEliminar.setEnabled(true);
 					btnModificar.setEnabled(true);
 					int index = table.getSelectedRow();
-					iD = (String)table.getModel().getValueAt(index, 0);
+					iD = (String)table.getModel().getValueAt(index, 5);
 				}
 			}
 		});
@@ -86,7 +87,17 @@ public class VerJugadores extends JDialog {
 				btnModificar = new JButton("Modificar");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if (!iD.equalsIgnoreCase("")) {
+							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							RegistroJugadores regJug = new RegistroJugadores(aux);
+							regJug.setModal(true);
+							regJug.setVisible(true);
+							btnEliminar.setEnabled(false);
+							btnModificar.setEnabled(false);
+							loadTable();
+						}
 					}
+					
 				});
 				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
@@ -95,6 +106,20 @@ public class VerJugadores extends JDialog {
 			}
 			
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (!iD.equalsIgnoreCase("")) {
+						Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+						int borrar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este elemento?" + aux.getNombre(), "Información", JOptionPane.YES_NO_OPTION);
+						if (borrar == JOptionPane.YES_OPTION) {
+							Conferencia.getInstance().getMisJugadores().remove(aux);
+							btnEliminar.setEnabled(false);
+							btnModificar.setEnabled(false);
+							loadTable();
+						}
+					}
+				}
+			});
 			btnEliminar.setEnabled(false);
 			buttonPane.add(btnEliminar);
 			{

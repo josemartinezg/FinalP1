@@ -12,14 +12,16 @@ public class Equipo {
 	private int juegosGanados; 
 	private int juegosPerdidos; 
 	private String estadio;
+	private String iD;
 	private ImageIcon logo;
-	public Equipo(String nombre, String entrenador, float presupuesto, String estadio) {
+	public Equipo(String nombre, String entrenador, float presupuesto, String estadio, String iD) {
 		super();
 		this.nombre = nombre;
 		this.estadio = estadio;
 		this.entrenador = entrenador;
 		this.presupuesto = presupuesto;
 		this.jugadores = new ArrayList<>();
+		this.iD = iD;
 		this.juegosGanados = 0;
 		this.juegosPerdidos = 0;
 	}
@@ -95,4 +97,12 @@ public class Equipo {
 	public void setLogo(ImageIcon logo) {
 		this.logo = logo;
 	}
+	public String getiD() {
+		return iD;
+	}
+	public void setiD(String iD) {
+		this.iD = iD;
+	}
+	
+
 }
