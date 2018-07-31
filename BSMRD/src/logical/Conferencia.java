@@ -176,5 +176,27 @@ public class Conferencia {
 		misJugadores.add(nuevoJugador);
 	}
 
+	public Jugador buscarJugadores(String iD) {
+		Jugador aux = null;
+		boolean found = false;
+		int ind = 0;
+		for (Jugador jugador : misJugadores){ 
+			if (jugador.getiD().equalsIgnoreCase(iD)) 
+				aux = jugador;
+		}
+		return aux;
+	}
+
+	public Equipo buscarEquipos(String iD) {
+		Equipo aux = null;
+		boolean found = false;
+		int ind = 0;
+		for (Equipo equipo : equipos){ 
+			if (equipo.getiD().equalsIgnoreCase(iD)) 
+				aux = equipo;
+		}
+		return aux;
+	}
+
 }
 
