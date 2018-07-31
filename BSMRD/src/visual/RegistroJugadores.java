@@ -47,13 +47,21 @@ public class RegistroJugadores extends JDialog {
 	private SeleccionImagen selImg = new SeleccionImagen();
 	private DefaultComboBoxModel modeloLesiones =
 			new DefaultComboBoxModel(new String[] {"<Sin Lesi\u00F3n>", "Lesi\u00F3n Grado 1", "Lesi\u00F3n Grado 2", "Lesi\u00F3n Grado 3", "Lesi\u00F3n Grado 4", "Lesi\u00F3n Grado 5"});
+	private static RegistroJugadores regJugadores;
 
 	/**
 	 * Create the dialog.
 	 */
+	
+	public static RegistroJugadores getInstance() {
+		if(regJugadores==null) {
+			regJugadores = new RegistroJugadores(null);
+		}
+		return regJugadores;
+	}
 	/*Pasar el equipo por constructor al momento de crear el equipo(?), 
 	 * y no pasar nada al momento de agregarlo independientemente*/
-	public RegistroJugadores(Jugador jugador) {
+	private RegistroJugadores(Jugador jugador) {
 		this.jugador = jugador;
 		if ( jugador == null) {
 			setTitle("Registro de Jugadores");
