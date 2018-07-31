@@ -103,6 +103,4 @@ public class Equipo {
 	public void setiD(String iD) {
 		this.iD = iD;
 	}
-	
-
 }
