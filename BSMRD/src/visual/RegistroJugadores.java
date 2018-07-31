@@ -60,8 +60,8 @@ public class RegistroJugadores extends JDialog {
 		}else {
 			setTitle("Modificación de Jugadores");
 		}
-		
 		setBounds(100, 100, 512, 635);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -76,7 +76,8 @@ public class RegistroJugadores extends JDialog {
 		
 		cbxEquipo = new JComboBox();
 		cbxEquipo.setBounds(12, 56, 467, 22);
-		cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>", "Golden State Warriors", "San Antonio Spurs"}));
+		loadEquipos();
+		//cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>", "Golden State Warriors", "San Antonio Spurs"}));
 		contentPanel.add(cbxEquipo);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -143,7 +144,7 @@ public class RegistroJugadores extends JDialog {
 		
 		cbxLigaOrigen = new JComboBox();
 		cbxLigaOrigen.setBounds(12, 179, 230, 22);
-		cbxLigaOrigen.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione una Liga>", "G League", "Summer League", "JBA", "International Agency", ""}));
+		cbxLigaOrigen.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione una Liga>", "Gatorade Development League\t(G-League)", "Summer League", "International Free Agency", "Junior Basketball Association"}));
 		contentPanel.add(cbxLigaOrigen);
 		
 		JLabel lblLesiones = new JLabel("Lesiones Activas:");
@@ -188,7 +189,7 @@ public class RegistroJugadores extends JDialog {
 		contentPanel.add(lblFechaNacim);
 		
 		JSpinner spnEstatura = new JSpinner();
-		spnEstatura.setModel(new SpinnerListModel(new String[] {"5.7'", "5.8'", "5.9'", "6.0'", "6.1'", "6.2'", "6.3'", "6.4'", "6.5'", "6.6'", "6.7'"}));
+		spnEstatura.setModel(new SpinnerListModel(new String[] {"5.7'", "5.8'", "5.9'", "5.10'", "5.11'", "6.0'", "6.1'", "6.2'", "6.3'", "6.4'", "6.5'", "6.6'", "6.7'", "6.8'", "6.9'", "6.10'", "6.11'", "7.0'", "7.1'", "7.2'", "7.3'", "7.4'", "7.5'", "7.6'", "7.7'"}));
 		spnEstatura.setBounds(249, 243, 83, 22);
 		contentPanel.add(spnEstatura);
 		

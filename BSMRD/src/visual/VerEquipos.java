@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import logical.Conferencia;
 import logical.Equipo;
@@ -21,26 +22,18 @@ import logical.Equipo;
 public class VerEquipos extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JButton btnModificar;
-	private JButton btnEliminar;
-	private JButton btnSalir;
-	private String iD;
 	public static DefaultTableModel model;
+	private static JTable table;
+	private static JButton btnModificar;
+	private static JButton btnEliminar;
+	private static JButton btnSalir;
 	private static Object fila[];
+	private String iD;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			VerEquipos dialog = new VerEquipos();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
@@ -58,29 +51,25 @@ public class VerEquipos extends JDialog {
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.addMouseListener(new MouseAdapter() {
+				panel.add(scrollPane);
+				table = new JTable();
+				table.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if (table.getSelectedRow() >= 0) {
-							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(true);
-							int index = table.getSelectedRow();
-							iD = (String)table.getModel().getValueAt(index, 0);
+					if (table.getSelectedRow() >= 0) {
+						btnEliminar.setEnabled(true);
+						btnModificar.setEnabled(true);
+						int index = table.getSelectedRow();
+						iD = (String)table.getModel().getValueAt(index, 0);
 						}
 					}
 				});
-				panel.add(scrollPane);
-				table = new JTable();
 				scrollPane.setViewportView(table);
 				model = new DefaultTableModel();
-				String[] columnNames = {"ID.", "Logo", "Nombre", "Estadio", "Entrenador"};
+				String[] columnNames = {"ID", "Logo", "Nombre", "Estadio", "Entrenador"};
 				model.setColumnIdentifiers(columnNames);
 				table.setModel(model);
 				loadTable();
-				{
-					table = new JTable();
-					scrollPane.setViewportView(table);
-				}
 			}
 		}
 		{
@@ -88,12 +77,12 @@ public class VerEquipos extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnModificar = new JButton("Modificar");
+				btnModificar = new JButton("Modificar");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
 							Equipo aux = Conferencia.getInstance().buscarEquipos(iD);
-							RegEquipo regEquipo = new RegEquipo();
+							RegEquipo regEquipo = new RegEquipo(aux);
 							regEquipo.setModal(true);
 							regEquipo.setVisible(true);
 							btnEliminar.setEnabled(false);
@@ -126,7 +115,6 @@ public class VerEquipos extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Conferencia.getInstance().getMisJugadores().size(); i++) {
-			
 			fila[0] = Conferencia.getInstance().getEquipos().get(i).getiD();
 			//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
 			fila[2] = Conferencia.getInstance().getEquipos().get(i).getNombre();
@@ -134,5 +122,12 @@ public class VerEquipos extends JDialog {
 			fila[4] = Conferencia.getInstance().getEquipos().get(i).getEntrenador();
 			model.addRow(fila);
 		}
+		TableColumnModel columnModel = table.getColumnModel();
+		//table.setRowHeight(60);
+		columnModel.getColumn(0).setPreferredWidth(70);
+		columnModel.getColumn(1).setPreferredWidth(140);
+		columnModel.getColumn(2).setPreferredWidth(170);
+		columnModel.getColumn(3).setPreferredWidth(170);
+		columnModel.getColumn(4).setPreferredWidth(170);
 	}
 }
