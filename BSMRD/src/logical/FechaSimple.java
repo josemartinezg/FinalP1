@@ -20,6 +20,12 @@ public class FechaSimple {
 		this.month = fecha.get(Calendar.MONTH)+1;
 		this.year = fecha.get(Calendar.YEAR);
 	}
+	
+	private FechaSimple(Calendar fecha) {
+		this.day = fecha.get(Calendar.DAY_OF_MONTH);
+		this.month = fecha.get(Calendar.MONTH)+1;
+		this.year = fecha.get(Calendar.YEAR);
+	}
 
 	public int getDay() {
 		return day;
@@ -56,5 +62,26 @@ public class FechaSimple {
 				this.getMonth() == fechaParam.getMonth() &&
 				this.getYear() == fechaParam.getYear()
 		);
+	}
+	public Calendar getCalendar() {
+		Calendar currentDate = Calendar.getInstance();
+		currentDate.set(Calendar.DAY_OF_MONTH, day);
+		currentDate.set(Calendar.MONTH, month-1);
+		currentDate.set(Calendar.YEAR, year);
+		return currentDate;
+	}
+	
+	public int daysLeft() {
+		Calendar today = Calendar.getInstance();
+		Calendar future = getCalendar();
+		int dl = future.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR);
+		int yearDifference = future.get(Calendar.YEAR) - today.get(Calendar.YEAR);
+		dl += yearDifference * 365;
+		return dl;
+	}
+	
+	@Override
+	public String toString() {
+		return day + "/" + (month) + "/" + year;
 	}
 }

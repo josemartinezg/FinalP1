@@ -148,7 +148,7 @@ public class RegEquipo extends JDialog {
 		txtNombre.setText("");
 		txtEntrenador.setText("");
 		txtEstadio.setText("");
-		spnPresupuesto.setValue(1000.0);
+		spnPresupuesto.setValue(100000.0);
 	}
 	
 	private String generateID(String nombre) {
