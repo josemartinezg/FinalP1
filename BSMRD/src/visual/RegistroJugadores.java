@@ -47,20 +47,6 @@ public class RegistroJugadores extends JDialog {
 	private SeleccionImagen selImg = new SeleccionImagen();
 	private DefaultComboBoxModel modeloLesiones =
 			new DefaultComboBoxModel(new String[] {"<Sin Lesi\u00F3n>", "Lesi\u00F3n Grado 1", "Lesi\u00F3n Grado 2", "Lesi\u00F3n Grado 3", "Lesi\u00F3n Grado 4", "Lesi\u00F3n Grado 5"});
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-	try {
-		RegistroJugadores dialog = new RegistroJugadores(null);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-}
 
 	/**
 	 * Create the dialog.
@@ -76,6 +62,7 @@ public class RegistroJugadores extends JDialog {
 		}
 		
 		setBounds(100, 100, 512, 635);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
