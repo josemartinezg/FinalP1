@@ -7,13 +7,13 @@ public class Juego {
 	private FechaSimple fecha;
 	private Marcador marcador;
 	private boolean ocurrido = false;
-	public Juego(String estadio, Equipo local, Equipo visitante, FechaSimple fecha, Marcador marcador) {
+	public Juego(String estadio, Equipo local, Equipo visitante, FechaSimple fecha) {
 		super();
 		this.estadio = estadio;
 		this.local = local;
 		this.visitante = visitante;
 		this.fecha = fecha;
-		this.marcador = marcador;
+		this.marcador = new Marcador();
 	}
 	public String getEstadio() {
 		return estadio;
