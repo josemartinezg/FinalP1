@@ -80,12 +80,9 @@ public class Conferencia {
 		Jugador aux = null;
 		boolean found = false;
 		int ind = 0;
-		while ( ind < misJugadores.size() && !found ) {
-			if ( misJugadores.get(ind).getiD().equalsIgnoreCase(iD) ) {
-				aux = misJugadores.get(ind);
-				found = true;
-			}
-			ind++;
+		for (Jugador jugador : misJugadores){ 
+			if (jugador.getiD().equalsIgnoreCase(iD)) 
+				aux = jugador;
 		}
 		return aux;
 	}
@@ -94,12 +91,9 @@ public class Conferencia {
 		Equipo aux = null;
 		boolean found = false;
 		int ind = 0;
-		while ( ind < equipos.size() && !found ) {
-			if ( equipos.get(ind).getiD().equalsIgnoreCase(iD) ) {
-				aux = equipos.get(ind);
-				found = true;
-			}
-			ind++;
+		for (Equipo equipo : equipos){ 
+			if (equipo.getiD().equalsIgnoreCase(iD)) 
+				aux = equipo;
 		}
 		return aux;
 	}
