@@ -32,7 +32,7 @@ public class BasketCountDown {
 	   if (!running) {
 		   timer = new Timer();
 		   clock.setText(BasketCountDown.digitToTime(minutes) + ":" + BasketCountDown.digitToTime(seconds));
-		   timer.schedule(new DisplayCountdown(), 0, 250);
+		   timer.schedule(new DisplayCountdown(), 0, 100);
 		   running = true;
 	   }
    }

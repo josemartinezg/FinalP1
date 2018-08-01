@@ -74,7 +74,6 @@ public class Estadistica {
 					intentosTirosLibres += 1;
 					tirosLibres += anotacion;
 					porcentaje = (float)(tirosLibres/intentosTirosLibres);
-					System.out.print(tirosLibres +"," +puntosDeCampo +"," + puntosDeTres);
 					break;
 				case 2:
 					intentosDeCampo += 1;

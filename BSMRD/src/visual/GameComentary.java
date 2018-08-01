@@ -82,6 +82,10 @@ public class GameComentary extends JDialog {
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
 	
+	boolean extraTime = false;
+	Integer periodoActual = 1;
+	int maxQuarters = 1;
+	
 	// Pa TEST
 //	public static void main(String[] args) {
 //		try {
@@ -119,7 +123,7 @@ public class GameComentary extends JDialog {
 //			
 //			
 //			
-//			GameComentary dialog = new GameComentary(1, jg);
+//			GameComentary dialog = new GameComentary(3, jg);
 //			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 //			
 //			dialog.setVisible(true);
@@ -130,6 +134,7 @@ public class GameComentary extends JDialog {
 	
 	public GameComentary(int quarterDuration, Juego juego) {
 		this.juego = juego;
+		this.quarterDuration = quarterDuration;
 		equipoLocal = juego.getLocal();
 		equipoVisitante = juego.getVisitante();
 		
@@ -167,15 +172,16 @@ public class GameComentary extends JDialog {
 		contentPanel.add(textPaneTime);
 		
 		lblPeriod = new JLabel("Periodo");
+		lblPeriod.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPeriod.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblPeriod.setBounds(506, 59, 75, 31);
+		lblPeriod.setBounds(426, 59, 234, 31);
 		contentPanel.add(lblPeriod);
 		
 		textPanePeriod = new JTextPane();
 		textPanePeriod.setEditable(false);
 		textPanePeriod.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		textPanePeriod.setText("1");
-		textPanePeriod.setBounds(528, 97, 31, 31);
+		textPanePeriod.setText(periodoActual.toString());
+		textPanePeriod.setBounds(522, 97, 43, 31);
 		contentPanel.add(textPanePeriod);
 		
 		txtLocalPoints = new JTextField();
@@ -229,7 +235,6 @@ public class GameComentary extends JDialog {
 					if (cbxJugadaLocal.getSelectedIndex() == 0) {
 						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText())+1));
 						auxJugador.getEstadisticas().addTiro(1, true);
-						System.out.println(auxJugador.getEstadisticas().getTotalPuntos());
 						
 					} else {
 						auxJugador.getEstadisticas().addTiro(1, false);
@@ -578,13 +583,33 @@ public class GameComentary extends JDialog {
 	}
 
 	public void endPeriod() {
-        if (textPanePeriod.getText().equals("4")) {
+        if (periodoActual >= maxQuarters && !juegoEmpate()) {
        	 this.endGame();
+        } else if (periodoActual >= maxQuarters && juegoEmpate()) {
+        	int tiempoExtra = Integer.parseInt(textPanePeriod.getText());
+        	if (!extraTime) {
+        		countDown.setDefaultMinutes(quarterDuration/3);
+        		lblPeriod.setText("Tiempo Extra Nº");
+        		extraTime = true;
+        		textPanePeriod.setText(Integer.toString(1));
+        		okButton.setText("Iniciar OT");
+        	} else
+        		textPanePeriod.setText(Integer.toString(tiempoExtra+1));
+        	okButton.setEnabled(true);
+        	disablePointControls();
         } else {
-        	textPanePeriod.setText(Integer.toString(Integer.parseInt(textPanePeriod.getText())+1));
+        	periodoActual += 1;
+        	textPanePeriod.setText(Integer.toString(periodoActual));
         	okButton.setEnabled(true);
         	disablePointControls();
         }
 		
+	}
+	
+	public boolean juegoEmpate() {
+		int totalPointsLocal = Integer.parseInt(txtLocalPoints.getText());
+		int totalPointsAway = Integer.parseInt(txtAwayPoints.getText());
+		
+		return totalPointsLocal == totalPointsAway;
 	}
 }
