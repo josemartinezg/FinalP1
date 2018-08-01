@@ -19,6 +19,7 @@ import javax.swing.table.TableColumnModel;
 
 import logical.Conferencia;
 import logical.Jugador;
+import javax.swing.JComboBox;
 
 public class VerJugadores extends JDialog {
 
@@ -28,7 +29,10 @@ public class VerJugadores extends JDialog {
 	private static Object fila[];
 	private JButton btnEliminar;
 	private JButton btnModificar;
+	private JComboBox cbxEquipos;
 	private String iD;
+	private JButton btnReporteLesiones;
+	private JButton btnEstadsticas;
 
 	/**
 	 * Launch the application.
@@ -56,28 +60,36 @@ public class VerJugadores extends JDialog {
 		
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.addMouseListener(new MouseAdapter() {
+		scrollPane.setBounds(0, 46, 692, 342);
+		panel.setLayout(null);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (table.getSelectedRow() >= 0) {
 					btnEliminar.setEnabled(true);
 					btnModificar.setEnabled(true);
+					btnReporteLesiones.setEnabled(true);
+					btnEstadsticas.setEnabled(true);
 					int index = table.getSelectedRow();
 					iD = (String)table.getModel().getValueAt(index, 5);
 				}
 			}
 		});
-		panel.add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
 		scrollPane.setViewportView(table);
 		model = new DefaultTableModel();
 		String[] columnNames = {"No.", "Foto", "Equipo", "Nombre","Apellido", "ID"};
 		model.setColumnIdentifiers(columnNames);
 		table.setModel(model);
+		
+		cbxEquipos = new JComboBox();
+		cbxEquipos.setBounds(220, 11, 250, 22);
+		loadEquipos();
+		panel.add(cbxEquipos);
 		loadTable();
 		{
 			JPanel buttonPane = new JPanel();
@@ -103,27 +115,48 @@ public class VerJugadores extends JDialog {
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
-			}
-			
-			btnEliminar = new JButton("Eliminar");
-			btnEliminar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (!iD.equalsIgnoreCase("")) {
-						Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
-						int borrar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este elemento?" + aux.getNombre(), "Información", JOptionPane.YES_NO_OPTION);
-						if (borrar == JOptionPane.YES_OPTION) {
-							Conferencia.getInstance().getMisJugadores().remove(aux);
-							btnEliminar.setEnabled(false);
-							btnModificar.setEnabled(false);
-							loadTable();
+				
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!iD.equalsIgnoreCase("")) {
+							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							int borrar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este elemento?" + aux.getNombre(), "Información", JOptionPane.YES_NO_OPTION);
+							if (borrar == JOptionPane.YES_OPTION) {
+								Conferencia.getInstance().getMisJugadores().remove(aux);
+								btnEliminar.setEnabled(false);
+								btnModificar.setEnabled(false);
+								loadTable();
+							}
 						}
 					}
-				}
-			});
-			btnEliminar.setEnabled(false);
-			buttonPane.add(btnEliminar);
+				});
+				btnEliminar.setEnabled(false);
+				buttonPane.add(btnEliminar);
+				
+				btnReporteLesiones = new JButton("Lesiones");
+				btnReporteLesiones.setEnabled(false);
+				buttonPane.add(btnReporteLesiones);
+				
+				btnEstadsticas = new JButton("Estad\u00EDsticas");
+				btnEstadsticas.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+						VerEstadisticas verStats = new VerEstadisticas(aux);
+						verStats.setVisible(true);
+						
+					}
+				});
+				btnEstadsticas.setEnabled(false);
+				buttonPane.add(btnEstadsticas);
+			}
 			{
 				JButton btnSalir = new JButton("Salir");
+				btnSalir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					dispose();
+					}
+				});
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}
@@ -145,11 +178,18 @@ public class VerJugadores extends JDialog {
 		}
 		TableColumnModel columnModel = table.getColumnModel();
 		table.setRowHeight(60);
-		columnModel.getColumn(0).setPreferredWidth(70);
+		columnModel.getColumn(0).setPreferredWidth(60);
 		columnModel.getColumn(1).setPreferredWidth(140);
 		columnModel.getColumn(2).setPreferredWidth(170);
 		columnModel.getColumn(3).setPreferredWidth(170);
 		columnModel.getColumn(4).setPreferredWidth(170);
 		columnModel.getColumn(5).setPreferredWidth(120);
+	}
+	private void loadEquipos() {
+		for (int i = 0; i < Conferencia.getInstance().getEquipos().size(); i++) {
+			cbxEquipos.addItem(Conferencia.getInstance().getEquipos().get(i).getNombre());
+		}
+		cbxEquipos.insertItemAt("<Seleccione un equipo>", 0);
+		cbxEquipos.setSelectedIndex(0);
 	}
 }

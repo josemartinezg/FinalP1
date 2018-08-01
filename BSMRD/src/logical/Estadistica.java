@@ -11,6 +11,7 @@ public class Estadistica {
 	private int intentosTirosLibres;
 	private int intentosDeCampo;
 	private int intentosDeTres;
+	private int juegosJugados;
 	
 	//Añadir foto. 
 	
@@ -25,6 +26,7 @@ public class Estadistica {
 		intentosTirosLibres = 0;
 		intentosDeCampo = 0;
 		intentosDeTres = 0;
+		juegosJugados = 0;
 	}
 
 	public int getTirosLibres() {
@@ -89,6 +91,13 @@ public class Estadistica {
 	public void setIntentosDeTres(int intentosDeTres) {
 		this.intentosDeTres = intentosDeTres;
 	}
+	public int getJuegosJugados() {
+		return juegosJugados;
+	}
+
+	public void setJuegosJugados(int juegosJugados) {
+		this.juegosJugados = juegosJugados;
+	}
 	/*
 	 * Llamar desde pantalla del tablero o simulación del juego.
 	 * Condicionar los action listeners de acuerdo a las teclas. Ej: Si se asigna una tecla a tiro libre...
@@ -96,6 +105,8 @@ public class Estadistica {
 	 * Agregar estructura de control al momento de invocar la función.
 	 * */
 	
+
+
 	//TODO Probar enviandole datos directamente al constructor.
 	public float addTiro(int anotacion, boolean encestado) {
 		float porcentaje = 0;
