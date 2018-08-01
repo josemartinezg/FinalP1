@@ -58,6 +58,7 @@ public class BSM extends JFrame {
 	 * Create the frame.
 	 */
 	public BSM(Conferencia conf) {
+		conferencia = conf;
 		setTitle("Basketball Statistical Manager RD");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 800);
