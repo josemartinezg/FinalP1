@@ -14,6 +14,10 @@ import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import logical.Conferencia;
+import logical.Juego;
+
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
@@ -30,6 +34,7 @@ public class BSM extends JFrame {
 	private JMenuItem mntmListarEquipo;
 	private JMenuItem mntmRegistrarJugador;
 	private JMenuItem mntmListarJugador;
+	private Conferencia conferencia;
 
 	/**
 	 * Launch the application.
@@ -38,7 +43,8 @@ public class BSM extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BSM frame = new BSM();
+					Conferencia conf = Conferencia.getInstance();
+					BSM frame = new BSM(conf);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +57,8 @@ public class BSM extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BSM() {
+	public BSM(Conferencia conf) {
+		conferencia = conf;
 		setTitle("Basketball Statistical Manager RD");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 800);
@@ -105,7 +112,8 @@ public class BSM extends JFrame {
 	    btnIniciarSiguienteJuego.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		if (gameComentary == null) {
-		    		gameComentary = new GameComentary(10);
+	    			Juego proximoJuego = conferencia.getProximoJuego();
+		    		gameComentary = new GameComentary(10, proximoJuego);
 		    		btnIniciarSiguienteJuego.setText("Ver juego en curso");
 	    		}
 		    	gameComentary.setVisible(true);

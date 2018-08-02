@@ -19,7 +19,6 @@ public class Estadistica {
 		tirosLibres = 0;
 		puntosDeCampo = 0;
 		puntosDeTres = 0;
-		totalPuntos = 0;
 		asistencias = 0;
 		rebotes = 0;
 		intentosTirosLibres = 0;
@@ -31,63 +30,33 @@ public class Estadistica {
 		return tirosLibres;
 	}
 
-	public void setTirosLibres(int tirosLibres) {
-		this.tirosLibres = tirosLibres;
-	}
-
 	public int getPuntosDeCampo() {
 		return puntosDeCampo;
-	}
-	public void setPuntosDeCampo(int puntosDeCampo) {
-		this.puntosDeCampo = puntosDeCampo;
 	}
 	
 	public int getPuntosDeTres() {
 		return puntosDeTres;
 	}
 
-	public void setPuntosDeTres(int puntosDeTres) {
-		this.puntosDeTres = puntosDeTres;
-	}
-
 	public int getTotalPuntos() {
-		return totalPuntos;
+		return tirosLibres + puntosDeCampo + puntosDeTres;
 	}
 
-	public void setTotalPuntos(int totalPuntos) {
-		this.totalPuntos = totalPuntos;
-	}
 	public int getAsistencias() {
 		return asistencias;
 	}
-	public void setAsistencias(int asistencias) {
-		this.asistencias = asistencias;
-	}
 	public int getRebotes() {
 		return rebotes;
-	}
-	public void setRebotes(int rebotes) {
-		this.rebotes = rebotes;
 	}
 	public int getIntentosTirosLibres() {
 		return intentosTirosLibres;
 	}
 
-	public void setIntentosTirosLibres(int intentosTirosLibres) {
-		this.intentosTirosLibres = intentosTirosLibres;
-	}
-
 	public int getIntentosDeCampo() {
 		return intentosDeCampo;
 	}
-	public void setIntentosDeCampo(int intentosDeCampo) {
-		this.intentosDeCampo = intentosDeCampo;
-	}
 	public int getIntentosDeTres() {
 		return intentosDeTres;
-	}
-	public void setIntentosDeTres(int intentosDeTres) {
-		this.intentosDeTres = intentosDeTres;
 	}
 	/*
 	 * Llamar desde pantalla del tablero o simulación del juego.
@@ -99,34 +68,40 @@ public class Estadistica {
 	//TODO Probar enviandole datos directamente al constructor.
 	public float addTiro(int anotacion, boolean encestado) {
 		float porcentaje = 0;
-		if (encestado == true) {
+		if (encestado) {
 			switch (anotacion) {
-			case 1:
-				intentosTirosLibres += 1;
-				tirosLibres += anotacion;
-				porcentaje = (float)(tirosLibres/intentosTirosLibres);
-			case 2:
-				intentosDeCampo += 1;
-				puntosDeCampo += anotacion;
-				porcentaje = (float)(puntosDeCampo/intentosDeCampo);
-			case 3:
-				intentosDeTres += 1;
-				puntosDeTres += anotacion;
-				porcentaje = (float)(puntosDeTres/intentosDeTres);
+				case 1:
+					intentosTirosLibres += 1;
+					tirosLibres += anotacion;
+					porcentaje = (float)(tirosLibres/intentosTirosLibres);
+					break;
+				case 2:
+					intentosDeCampo += 1;
+					puntosDeCampo += anotacion;
+					porcentaje = (float)(puntosDeCampo/intentosDeCampo);
+					break;
+				case 3:
+					intentosDeTres += 1;
+					puntosDeTres += anotacion;
+					porcentaje = (float)(puntosDeTres/intentosDeTres);
+					break;
 			}
 
-		}else {
+		} else {
 			switch (anotacion) {
-			case 1:
-				intentosTirosLibres += 1;
-				porcentaje = (float)(tirosLibres/intentosTirosLibres);
-			case 2:
-				intentosDeCampo += 1;
-				porcentaje = (float)(puntosDeCampo/intentosDeCampo);
-			case 3:
-				intentosDeTres += 1;
-				porcentaje = (float)(puntosDeTres/intentosDeTres);
-			}
+				case 1:
+					intentosTirosLibres += 1;
+					porcentaje = (float)(tirosLibres/intentosTirosLibres);
+					break;
+				case 2:
+					intentosDeCampo += 1;
+					porcentaje = (float)(puntosDeCampo/intentosDeCampo);
+					break;
+				case 3:
+					intentosDeTres += 1;
+					porcentaje = (float)(puntosDeTres/intentosDeTres);
+					break;
+				}
 		}
 		return porcentaje;
 	}

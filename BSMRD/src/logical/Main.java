@@ -16,13 +16,13 @@ public class Main {
 		
 		// Testing: Get Proximo Juego
 		System.out.println("======== Probando Get Proximo Juego ============");
-		Juego j7 = new Juego("Estadio 7", null, null, new FechaSimple(30, 7, 2020), null);
-		Juego j6 = new Juego("Estadio 6", null, null, new FechaSimple(25, 7, 2019), null);
-		Juego j5 = new Juego("Estadio 5", null, null, new FechaSimple(2, 9, 2018), null);
-		Juego j4 = new Juego("Estadio 4", null, null, new FechaSimple(1, 8, 2018), null);
-		Juego j1 = new Juego("Estadio 1", null, null, new FechaSimple(30, 7, 2018), null);
-		Juego j2 = new Juego("Estadio 2", null, null, new FechaSimple(26, 7, 2018), null);
-		Juego j3 = new Juego("Estadio 3", null, null, new FechaSimple(28, 7, 2018), null);
+		Juego j7 = new Juego("Estadio 7", null, null, new FechaSimple(30, 7, 2020));
+		Juego j6 = new Juego("Estadio 6", null, null, new FechaSimple(25, 7, 2019));
+		Juego j5 = new Juego("Estadio 5", null, null, new FechaSimple(2, 9, 2018));
+		Juego j4 = new Juego("Estadio 4", null, null, new FechaSimple(1, 8, 2018));
+		Juego j1 = new Juego("Estadio 1", null, null, new FechaSimple(30, 7, 2018));
+		Juego j2 = new Juego("Estadio 2", null, null, new FechaSimple(26, 7, 2018));
+		Juego j3 = new Juego("Estadio 3", null, null, new FechaSimple(28, 7, 2018));
 		
 		j2.setOcurrido(true);
 		
