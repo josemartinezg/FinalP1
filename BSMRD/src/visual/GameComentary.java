@@ -446,6 +446,7 @@ public class GameComentary extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					equipoLocalList.getSelectedPlayer().getEstadisticas().addAsistencias();
+					System.out.println(equipoLocalList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
 				} catch(IndexOutOfBoundsException e) {
 					System.out.println("Ningun jugador seleccionado");
 				}
@@ -462,6 +463,7 @@ public class GameComentary extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					equipoLocalList.getSelectedPlayer().getEstadisticas().addRebotes();
+					System.out.println(equipoLocalList.getSelectedPlayer().getNombre() + " ha conseguido un rebote.");
 				} catch(IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
@@ -478,6 +480,7 @@ public class GameComentary extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					equipoVisitanteList.getSelectedPlayer().getEstadisticas().addAsistencias();
+					System.out.println(equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
 				} catch(IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
@@ -494,6 +497,7 @@ public class GameComentary extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					equipoVisitanteList.getSelectedPlayer().getEstadisticas().addRebotes();
+					System.out.println(equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido un rebote.");
 				} catch(IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
