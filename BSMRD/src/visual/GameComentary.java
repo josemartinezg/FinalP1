@@ -43,7 +43,6 @@ public class GameComentary extends JDialog {
 	private JTextField txtLocalPoints;
 	private JTextField txtAwayPoints;
 	private JLabel lblAway;
-	private JSeparator separator;
 	private JSeparator separator_1;
 	private JLabel lblLocal;
 	private JTextPane textPaneTime;
@@ -99,57 +98,55 @@ public class GameComentary extends JDialog {
 		
 		lblAway = new JLabel("Visitante");
 		lblAway.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAway.setFont(new Font("Trebuchet MS", Font.ITALIC, 23));
-		lblAway.setBounds(967, 0, 110, 37);
+		lblAway.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblAway.setBounds(960, 14, 110, 37);
 		contentPanel.add(lblAway);
 		{
 			lblLocal = new JLabel("Local");
 			lblLocal.setHorizontalAlignment(SwingConstants.CENTER);
-			lblLocal.setFont(new Font("Trebuchet MS", Font.ITALIC, 23));
-			lblLocal.setBounds(-15, 0, 110, 37);
+			lblLocal.setFont(new Font("Tahoma", Font.PLAIN, 23));
+			lblLocal.setBounds(10, 14, 87, 37);
 			contentPanel.add(lblLocal);
 		}
 		
-		separator = new JSeparator();
-		separator.setBounds(0, 28, 1087, 9);
-		contentPanel.add(separator);
-		
 		textPaneTime = new JTextPane();
-		textPaneTime.setFont(new Font("Verdana", Font.PLAIN, 37));
+		textPaneTime.setForeground(Color.RED);
+		textPaneTime.setFont(new Font("Seven Segment", Font.BOLD, 50));
 		textPaneTime.setText("15:00");
 		
 		textPaneTime.setEditable(false);
-		textPaneTime.setBounds(470, 0, 147, 48);
+		textPaneTime.setBounds(489, 0, 110, 58);
 		contentPanel.add(textPaneTime);
 		
 		lblPeriod = new JLabel("Periodo");
-		lblPeriod.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
+		lblPeriod.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblPeriod.setBounds(506, 59, 75, 31);
 		contentPanel.add(lblPeriod);
 		
 		textPanePeriod = new JTextPane();
+		textPanePeriod.setForeground(Color.RED);
 		textPanePeriod.setEditable(false);
-		textPanePeriod.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		textPanePeriod.setFont(new Font("Seven Segment", Font.PLAIN, 32));
 		textPanePeriod.setText("1");
-		textPanePeriod.setBounds(528, 97, 31, 31);
+		textPanePeriod.setBounds(534, 92, 21, 37);
 		contentPanel.add(textPanePeriod);
 		
 		txtLocalPoints = new JTextField();
 		txtLocalPoints.setEditable(false);
-		txtLocalPoints.setForeground(new Color(153, 102, 0));
+		txtLocalPoints.setForeground(Color.GREEN);
 		txtLocalPoints.setText("0");
-		txtLocalPoints.setFont(new Font("Showcard Gothic", Font.ITALIC, 28));
-		txtLocalPoints.setBounds(139, 12, 68, 36);
+		txtLocalPoints.setFont(new Font("Seven Segment", Font.BOLD, 30));
+		txtLocalPoints.setBounds(139, 12, 68, 39);
 		contentPanel.add(txtLocalPoints);
 		txtLocalPoints.setColumns(10);
 		
 		txtAwayPoints = new JTextField();
-		txtAwayPoints.setForeground(new Color(153, 102, 0));
+		txtAwayPoints.setForeground(Color.GREEN);
 		txtAwayPoints.setText("0");
-		txtAwayPoints.setFont(new Font("Showcard Gothic", Font.ITALIC, 28));
+		txtAwayPoints.setFont(new Font("Seven Segment", Font.BOLD, 30));
 		txtAwayPoints.setEditable(false);
 		txtAwayPoints.setColumns(10);
-		txtAwayPoints.setBounds(880, 12, 68, 36);
+		txtAwayPoints.setBounds(880, 12, 68, 39);
 		contentPanel.add(txtAwayPoints);
 		
 		// DATA PRUEBA
@@ -222,7 +219,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		localOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/1-c.png")));
-		localOne.setBounds(10, 451, 31, 23);
+		localOne.setBounds(10, 451, 32, 32);
 		contentPanel.add(localOne);
 		
 		localTwo = new JButton("");
@@ -237,7 +234,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		localTwo.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/2-c.png")));
-		localTwo.setBounds(64, 451, 31, 23);
+		localTwo.setBounds(64, 451, 32, 32);
 		contentPanel.add(localTwo);
 		
 		localThree = new JButton("");
@@ -253,7 +250,7 @@ public class GameComentary extends JDialog {
 		});
 		localThree.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		localThree.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/numbers-3-black-icon(1).png")));
-		localThree.setBounds(119, 451, 31, 23);
+		localThree.setBounds(119, 451, 32, 32);
 		contentPanel.add(localThree);
 		
 		localMinusOne = new JButton("");
@@ -265,7 +262,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		localMinusOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/backspace_web_remove_pixel_per.png")));
-		localMinusOne.setBounds(176, 451, 31, 23);
+		localMinusOne.setBounds(176, 451, 32, 32);
 		contentPanel.add(localMinusOne);
 		
 		awayOne = new JButton("");
@@ -280,7 +277,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		awayOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/1-c.png")));
-		awayOne.setBounds(880, 451, 31, 23);
+		awayOne.setBounds(880, 451, 32, 32);
 		contentPanel.add(awayOne);
 		
 		awayTwo = new JButton("");
@@ -295,7 +292,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		awayTwo.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/2-c.png")));
-		awayTwo.setBounds(939, 451, 31, 23);
+		awayTwo.setBounds(939, 451, 32, 32);
 		contentPanel.add(awayTwo);
 		
 		awayThree = new JButton("");
@@ -310,7 +307,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		awayThree.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/numbers-3-black-icon(1).png")));
-		awayThree.setBounds(992, 451, 31, 23);
+		awayThree.setBounds(992, 451, 32, 32);
 		contentPanel.add(awayThree);
 		
 		awayMinusOne = new JButton("");
@@ -322,7 +319,7 @@ public class GameComentary extends JDialog {
 			}
 		});
 		awayMinusOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/backspace_web_remove_pixel_per.png")));
-		awayMinusOne.setBounds(1046, 451, 31, 23);
+		awayMinusOne.setBounds(1046, 451, 32, 32);
 		contentPanel.add(awayMinusOne);
 		
 		separator_1 = new JSeparator();
@@ -362,13 +359,13 @@ public class GameComentary extends JDialog {
 		cbxJugadaLocal = new JComboBox();
 		cbxJugadaLocal.setEnabled(false);
 		cbxJugadaLocal.setModel(new DefaultComboBoxModel(new String[] {"Anotacion", "Intento"}));
-		cbxJugadaLocal.setBounds(10, 409, 197, 20);
+		cbxJugadaLocal.setBounds(10, 409, 197, 29);
 		contentPanel.add(cbxJugadaLocal);
 		
 		cbxJugadaVisitante = new JComboBox();
 		cbxJugadaVisitante.setEnabled(false);
 		cbxJugadaVisitante.setModel(new DefaultComboBoxModel(new String[] {"Anotacion", "Intento"}));
-		cbxJugadaVisitante.setBounds(880, 412, 197, 20);
+		cbxJugadaVisitante.setBounds(880, 412, 197, 26);
 		contentPanel.add(cbxJugadaVisitante);
 	}
 
