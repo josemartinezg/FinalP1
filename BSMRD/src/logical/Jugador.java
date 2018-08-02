@@ -1,5 +1,7 @@
 package logical;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -133,4 +135,18 @@ public class Jugador {
 	public void setFotoPersonal(ImageIcon fotoPersonal) {
 		this.fotoPersonal = fotoPersonal;
 	}	
-}
+	
+	public int calcularEdad() {
+		int birthDay = fechaNacimiento.getDay();
+		int birthMonth = fechaNacimiento.getMonth();
+		int birthYear = fechaNacimiento.getYear();
+		
+		LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+		LocalDate currentDate = LocalDate.now();
+		 if ((birthDate != null) && (currentDate != null)) {
+	            return Period.between(birthDate, currentDate).getYears();
+	        } else {
+	            return 0;
+	        }
+		}
+	}

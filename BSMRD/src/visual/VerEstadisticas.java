@@ -14,7 +14,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import logical.Conferencia;
 import logical.Jugador;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VerEstadisticas extends JDialog {
 
@@ -82,6 +85,7 @@ public class VerEstadisticas extends JDialog {
 		
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
+		txtNombre.setText(jugador.getNombre() + ' ' + jugador.getApellido());
 		txtNombre.setBounds(259, 90, 223, 22);
 		contentPanel.add(txtNombre);
 		txtNombre.setColumns(10);
@@ -172,7 +176,7 @@ public class VerEstadisticas extends JDialog {
 		
 		txtEdad = new JTextField();
 		txtEdad.setEditable(false);
-		//txtEdad.setText(jugador.calcularEdad());
+		txtEdad.setText(String.valueOf(jugador.calcularEdad()));
 		txtEdad.setColumns(10);
 		txtEdad.setBounds(382, 143, 100, 22);
 		contentPanel.add(txtEdad);
@@ -228,20 +232,22 @@ public class VerEstadisticas extends JDialog {
 		
 		txtPPJ = new JTextField();
 		txtPPJ.setEditable(false);
-		txtRPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos, juegosJugados)));
+		txtPPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos, juegosJugados)));
 		txtPPJ.setColumns(10);
 		txtPPJ.setBounds(12, 379, 100, 22);
 		contentPanel.add(txtPPJ);
 		
 		txtPTT = new JTextField();
 		txtPTT.setEditable(false);
-		//txtPTT.setText(String.valueOf(jugador.getEstadisticas().));
+		//Ajustar método
+		txtPTT.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
 		txtPTT.setColumns(10);
 		txtPTT.setBounds(334, 457, 100, 22);
 		contentPanel.add(txtPTT);
 		
 		txtPTC = new JTextField();
 		txtPTC.setEditable(false);
+		//Ajustar Método
 		txtPTC.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
 		txtPTC.setColumns(10);
 		txtPTC.setBounds(171, 457, 100, 22);
@@ -249,6 +255,8 @@ public class VerEstadisticas extends JDialog {
 		
 		txtPTL = new JTextField();
 		txtPTL.setEditable(false);
+		//Ajustar Método
+		txtPTL.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
 		txtPTL.setColumns(10);
 		txtPTL.setBounds(12, 457, 100, 22);
 		contentPanel.add(txtPTL);
@@ -258,6 +266,11 @@ public class VerEstadisticas extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnSalir = new JButton("Salir");
+				btnSalir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}

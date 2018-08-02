@@ -152,12 +152,22 @@ public class Estadistica {
 		rebotes += 1;
 	}
 	public int puntosPorJuego(int cantJuegos) {
-		int promedio = totalPuntos/cantJuegos;
+		int promedio = 0;
+		if (cantJuegos != 0) {
+			promedio = totalPuntos/cantJuegos;
+		}else {
+			promedio = 0;
+		}
 		return promedio;
 	}
 	
 	public float calcAnotacionesPorJuego(int anotacion, int juegosJugados) {
 		float anotacionPorJuego = anotacion/juegosJugados;
+		if (anotacion != 0 || juegosJugados != 0) {
+			anotacionPorJuego = anotacion/juegosJugados;
+		}else {
+			anotacionPorJuego = 0;
+		}
 		return anotacionPorJuego;
 	}
 	/*
