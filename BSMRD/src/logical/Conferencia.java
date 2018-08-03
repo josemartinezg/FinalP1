@@ -2,7 +2,6 @@ package logical;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -108,19 +107,22 @@ public class Conferencia implements Serializable {
 	}
 	
 	public static Conferencia getInstance() throws IOException, ClassNotFoundException {		
-		try {
-			File file = new File("src/data/data.dat");
-			FileInputStream inputStream = new FileInputStream(file);
-			@SuppressWarnings("resource")
-			ObjectInputStream objectInput = new ObjectInputStream(inputStream);
-			conf = (Conferencia) objectInput.readObject();
-			inputStream.close();
-			objectInput.close();
-		} catch (ClassNotFoundException e) {
-			conf = new Conferencia();
-		} catch (Exception e1) {
-			conf = new Conferencia();
+		if (conf == null) {
+			try {
+				File file = new File("src/data/data.dat");
+				FileInputStream inputStream = new FileInputStream(file);
+				@SuppressWarnings("resource")
+				ObjectInputStream objectInput = new ObjectInputStream(inputStream);
+				conf = (Conferencia) objectInput.readObject();
+				inputStream.close();
+				objectInput.close();
+			} catch (ClassNotFoundException e) {
+				conf = new Conferencia();
+			} catch (Exception e1) {
+				conf = new Conferencia();
+			}
 		}
+
 		return conf;
 	}
 	
@@ -141,15 +143,7 @@ public class Conferencia implements Serializable {
 	}
 	
 	public Juego getProximoJuego() {
-		int i = 0;
-		boolean encontrado = false;
-		Juego aux = null;
-		while(!encontrado && i < juegos.size()) {
-			aux = juegos.get(i);
-			if (!aux.isOcurrido()) encontrado = true;
-			else i++;
-		}
-		return aux;
+		return getJuegosSemana().get(0);
 	}
 	
 	public ArrayList<Jugador> topMasPuntos() {
@@ -158,7 +152,7 @@ public class Conferencia implements Serializable {
 			public int compare(Object j1, Object j2) {
 				Integer puntos1 = ((Jugador) j1).getEstadisticas().getTotalPuntos();
 				Integer puntos2 = ((Jugador) j2).getEstadisticas().getTotalPuntos();
-				return puntos1.compareTo(puntos2);
+				return puntos2.compareTo(puntos1);
 			}
 		});
 		return aux;
@@ -170,7 +164,7 @@ public class Conferencia implements Serializable {
 			public int compare(Object j1, Object j2) {
 				Integer asist1 = ((Jugador) j1).getEstadisticas().getAsistencias();
 				Integer asist2 = ((Jugador) j2).getEstadisticas().getAsistencias();
-				return asist1.compareTo(asist2);
+				return asist2.compareTo(asist1);
 			}
 		});
 		return aux;
@@ -182,7 +176,7 @@ public class Conferencia implements Serializable {
 			public int compare(Object j1, Object j2) {
 				Integer rebotes1 = ((Jugador) j1).getEstadisticas().getRebotes();
 				Integer rebotes2 = ((Jugador) j2).getEstadisticas().getRebotes();
-				return rebotes1.compareTo(rebotes2);
+				return rebotes2.compareTo(rebotes1);
 			}
 		});
 		return aux;
@@ -194,7 +188,7 @@ public class Conferencia implements Serializable {
 			public int compare(Object j1, Object j2) {
 				Float pt = ((Jugador) j1).getEstadisticas().getPorcentajeTiro();
 				Float pt2 = ((Jugador) j2).getEstadisticas().getPorcentajeTiro();
-				return pt.compareTo(pt2);
+				return pt2.compareTo(pt);
 			}
 		});
 		return aux;
@@ -206,7 +200,7 @@ public class Conferencia implements Serializable {
 			public int compare(Object j1, Object j2) {
 				Float wr = ((Equipo) j1).getWinRate();
 				Float wr2 = ((Equipo) j2).getWinRate();
-				return wr.compareTo(wr2);
+				return wr2.compareTo(wr);
 			}
 		});
 		return aux;
@@ -231,6 +225,11 @@ public class Conferencia implements Serializable {
 	}
 	public void addJugador(Jugador nuevoJugador) throws IOException {
 		misJugadores.add(nuevoJugador);
+		for (Equipo equipo : equipos) {
+			if (equipo.getNombre().equalsIgnoreCase(nuevoJugador.getEquipo())) {
+				equipo.addJugador(nuevoJugador);
+			}
+		}
 		Conferencia.save();
 	}
 

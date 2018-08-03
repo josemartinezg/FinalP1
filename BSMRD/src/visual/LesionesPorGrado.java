@@ -43,7 +43,7 @@ public class LesionesPorGrado extends JFrame {
     private JFreeChart torta;
     private JLabel lblTorta;
 
-	public LesionesPorGrado() {
+	public LesionesPorGrado() throws ClassNotFoundException, IOException {
 		setResizable(false);
 		setBounds(new Rectangle(0, 0, 800, 600));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -82,10 +82,6 @@ public class VerEquipos extends JDialog {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				{
-					table = new JTable();
-					scrollPane.setViewportView(table);
-				}
 			}
 		}
 		{
@@ -133,14 +129,45 @@ public class VerEquipos extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
-							Equipo aux = Conferencia.getInstance().buscarEquipos(iD);
+							Equipo aux = null;
+							try {
+								aux = Conferencia.getInstance().buscarEquipos(iD);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							int borrar = JOptionPane.showConfirmDialog(null, "�Desea eliminar este elemento?" + aux.getNombre(), "Informaci�n", JOptionPane.YES_NO_OPTION);
 							if (borrar == JOptionPane.YES_OPTION) {
-								Conferencia.getInstance().getEquipos().remove(aux);
+								try {
+									Conferencia.getInstance().getEquipos().remove(aux);
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								btnEliminar.setEnabled(false);
 								btnModificar.setEnabled(false);
-								loadTable();
+								try {
+									loadTable();
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 							}
+						}
+						try {
+							Conferencia.save();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 					}
 				});

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import logical.Conferencia;
 import logical.Equipo;
 import logical.Jugador;
 import logical.FechaSimple;
@@ -186,9 +187,8 @@ public class GameComentary extends JDialog {
 		textPaneTime.setForeground(Color.RED);
 		textPaneTime.setFont(new Font("Seven Segment", Font.BOLD, 50));
 		textPaneTime.setText("00:00");
-		textPaneTime.setFont(new Font("Verdana", Font.PLAIN, 37));
 		textPaneTime.setEditable(false);
-		textPaneTime.setBounds(489, 0, 110, 58);
+		textPaneTime.setBounds(482, 0, 130, 58);
 		contentPanel.add(textPaneTime);
 
 		lblPeriod = new JLabel("Periodo");
@@ -566,7 +566,7 @@ public class GameComentary extends JDialog {
 		return aux;
 	}
 
-	private void endGame() {
+	private void endGame() throws IOException, ClassNotFoundException {
 		// acabar el juego
 		System.out.println("Fin del juego");
 		cancelButton.setEnabled(true);
@@ -586,6 +586,9 @@ public class GameComentary extends JDialog {
 			juego.getVisitante().setJuegosGanados(juego.getVisitante().getJuegosGanados() + 1);
 			juego.getLocal().setJuegosPerdidos(juego.getLocal().getJuegosPerdidos() + 1);
 		}
+		Conferencia.save();
+		BSM.fillJuegosSemana();
+		BSM.fillJugDestacados();
 	}
 
 	private void disablePointControls() {
@@ -628,7 +631,7 @@ public class GameComentary extends JDialog {
 		btnReboteVisitante.setEnabled(true);
 	}
 
-	public void endPeriod() {
+	public void endPeriod() throws IOException, ClassNotFoundException {
         if (periodoActual >= maxQuarters && !juegoEmpate()) {
        	 this.endGame();
         } else if (periodoActual >= maxQuarters && juegoEmpate()) {
@@ -649,27 +652,6 @@ public class GameComentary extends JDialog {
         	okButton.setEnabled(true);
         	disablePointControls();
         }
-		
-		if (periodoActual >= maxQuarters && !juegoEmpate()) {
-			this.endGame();
-		} else if (periodoActual >= maxQuarters && juegoEmpate()) {
-			int tiempoExtra = Integer.parseInt(textPanePeriod.getText());
-			if (!extraTime) {
-				countDown.setDefaultMinutes(quarterDuration / 3);
-				lblPeriod.setText("Tiempo Extra Nº");
-				extraTime = true;
-				textPanePeriod.setText(Integer.toString(1));
-				okButton.setText("Iniciar OT");
-			} else
-				textPanePeriod.setText(Integer.toString(tiempoExtra + 1));
-			okButton.setEnabled(true);
-			disablePointControls();
-		} else {
-			periodoActual += 1;
-			textPanePeriod.setText(Integer.toString(periodoActual));
-			okButton.setEnabled(true);
-			disablePointControls();
-		}
 	}
 
 	public boolean juegoEmpate() {

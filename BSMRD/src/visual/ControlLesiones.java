@@ -16,11 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import logical.Conferencia;
 import logical.FechaSimple;
 import logical.Jugador;
 import logical.Lesion;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class ControlLesiones extends JDialog {
@@ -178,17 +180,22 @@ public class ControlLesiones extends JDialog {
 							
 							if (!(descripcion.equalsIgnoreCase("") || tiempoLesionado.equalsIgnoreCase(""))){
 							Lesion nuevaLesion = new Lesion(tipoLes, gradoLesion, fechaInicio, tiempoLesionado , fechaRegreso, descripcion, true);
+							jugador.getMisLesiones().add(nuevaLesion);
+							try {
+								Conferencia.save();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							txtFechaRegreso.setText(String.valueOf(fechaRegreso.getDay())+ "/"+String.valueOf(fechaRegreso.getMonth())+ "/"+ String.valueOf(fechaRegreso.getYear()));
-							
-							System.out.println(tipoLes + "\n" + String.valueOf(gradoLesion) + "\n" + day+"/"+month+"/"+year + "\n" +
-									fechaRegreso.getDay()+"/"+ fechaRegreso.getMonth() +"/"+ fechaRegreso.getYear() + "\n" + tiempoLesionado  +"\n"  + "\n\n" + descripcion);	
+								
 							JOptionPane.showMessageDialog(null, "La lesión registrada con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
 							 }else {
-								 JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
+								 JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
 							 }
 						}else {
 							System.out.println("Error! Numeros no van en la fecha...");
-							JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
 						}
 					}
 					private int calcGradoLesion(String tipoLes) {

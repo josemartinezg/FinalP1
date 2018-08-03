@@ -31,7 +31,7 @@ public class TopFivePorcentajeTiro extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblBarra;
 	
-	public TopFivePorcentajeTiro() {
+	public TopFivePorcentajeTiro() throws ClassNotFoundException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 664, 563);
 		contentPane = new JPanel();
