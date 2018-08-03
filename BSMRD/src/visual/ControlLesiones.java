@@ -191,13 +191,11 @@ public class ControlLesiones extends JDialog {
 							JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
 						}
 					}
-
 					private int calcGradoLesion(String tipoLes) {
 						String aux[] = tipoLes.split(" ");
 						int gradoLes = Integer.valueOf(aux[2]);
 						return gradoLes;
 					}
-
 					private FechaSimple calcFechaRegreso(int day, int month, int year) {
 						String tiempoDeshab = cbxTiempoDeDesahibilitado.getSelectedItem().toString();
 						String [] unidad = tiempoDeshab.split(" ");
