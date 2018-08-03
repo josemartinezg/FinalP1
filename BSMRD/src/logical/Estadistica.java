@@ -12,8 +12,7 @@ public class Estadistica {
 	private int intentosDeCampo;
 	private int intentosDeTres;
 	private int juegosJugados;
-	
-	//Añadir foto. 
+	private float porcentajeTiro;
 	
 	public Estadistica() {
 		super();
@@ -26,6 +25,7 @@ public class Estadistica {
 		intentosDeCampo = 0;
 		intentosDeTres = 0;
 		juegosJugados = 0;
+		porcentajeTiro = 0;
 	}
 
 	public int getTirosLibres() {
@@ -65,37 +65,27 @@ public class Estadistica {
 		return juegosJugados;
 	}
 
-	public void setJuegosJugados(int juegosJugados) {
-		this.juegosJugados = juegosJugados;
+	public void aumentarJuegos() {
+		this.juegosJugados += 1;
 	}
-	/*
-	 * Llamar desde pantalla del tablero o simulación del juego.
-	 * Condicionar los action listeners de acuerdo a las teclas. Ej: Si se asigna una tecla a tiro libre...
-	 * ... "addPuntos(1, T/F)".  
-	 * Agregar estructura de control al momento de invocar la función.
-	 * */
-	
 
-
-	//TODO Probar enviandole datos directamente al constructor.
-	public float addTiro(int anotacion, boolean encestado) {
-		float porcentaje = 0;
+	public void addTiro(int anotacion, boolean encestado) {
 		if (encestado) {
 			switch (anotacion) {
 				case 1:
 					intentosTirosLibres += 1;
 					tirosLibres += anotacion;
-					porcentaje = (float)(tirosLibres/intentosTirosLibres);
+					porcentajeTiro = (float)(tirosLibres/intentosTirosLibres);
 					break;
 				case 2:
 					intentosDeCampo += 1;
 					puntosDeCampo += anotacion;
-					porcentaje = (float)(puntosDeCampo/intentosDeCampo);
+					porcentajeTiro = (float)(puntosDeCampo/intentosDeCampo);
 					break;
 				case 3:
 					intentosDeTres += 1;
 					puntosDeTres += anotacion;
-					porcentaje = (float)(puntosDeTres/intentosDeTres);
+					porcentajeTiro = (float)(puntosDeTres/intentosDeTres);
 					break;
 			}
 
@@ -103,19 +93,18 @@ public class Estadistica {
 			switch (anotacion) {
 				case 1:
 					intentosTirosLibres += 1;
-					porcentaje = (float)(tirosLibres/intentosTirosLibres);
+					porcentajeTiro = (float)(tirosLibres/intentosTirosLibres);
 					break;
 				case 2:
 					intentosDeCampo += 1;
-					porcentaje = (float)(puntosDeCampo/intentosDeCampo);
+					porcentajeTiro = (float)(puntosDeCampo/intentosDeCampo);
 					break;
 				case 3:
 					intentosDeTres += 1;
-					porcentaje = (float)(puntosDeTres/intentosDeTres);
+					porcentajeTiro = (float)(puntosDeTres/intentosDeTres);
 					break;
 				}
 		}
-		return porcentaje;
 	}
 	
 	//Determinar si estos métodos son necesarios en esta clase...
@@ -127,17 +116,17 @@ public class Estadistica {
 	public void addRebotes() {
 		rebotes += 1;
 	}
-	public int puntosPorJuego(int cantJuegos) {
+	public int puntosPorJuego() {
 		int promedio = 0;
-		if (cantJuegos != 0) {
-			promedio = totalPuntos/cantJuegos;
+		if (juegosJugados != 0) {
+			promedio = totalPuntos/juegosJugados;
 		}else {
 			promedio = 0;
 		}
 		return promedio;
 	}
 	
-	public float calcAnotacionesPorJuego(int anotacion, int juegosJugados) {
+	public float calcAnotacionesPorJuego(int anotacion) {
 		float anotacionPorJuego = anotacion/juegosJugados;
 		if (anotacion != 0 || juegosJugados != 0) {
 			anotacionPorJuego = anotacion/juegosJugados;
@@ -145,6 +134,10 @@ public class Estadistica {
 			anotacionPorJuego = 0;
 		}
 		return anotacionPorJuego;
+	}
+	
+	public float getPorcentajeTiro() {
+		return porcentajeTiro;
 	}
 	/*
 	public float calcRebotesPorJuego(int juegosJugados) {

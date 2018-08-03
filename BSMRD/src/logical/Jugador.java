@@ -40,6 +40,7 @@ public class Jugador {
 		this.estatura = estatura;
 		this.peso = peso;
 		this.fotoPersonal = foto;
+		misLesiones = new ArrayList();
 	}
 	public String getNombre() {
 		return nombre;
