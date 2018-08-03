@@ -103,4 +103,7 @@ public class Equipo {
 	public void setiD(String iD) {
 		this.iD = iD;
 	}
+	public float getWinRate() {
+		return (float) juegosGanados/juegosPerdidos;
+	}
 }
