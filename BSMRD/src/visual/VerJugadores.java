@@ -82,9 +82,25 @@ public class VerJugadores extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String equipo = cbxEquipos.getSelectedItem().toString();
 				if (equipo != "<Seleccione un equipo>") {
-					loadTable(equipo);
+					try {
+						loadTable(equipo);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}else {
-					loadTable(null);
+					try {
+						loadTable(null);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
