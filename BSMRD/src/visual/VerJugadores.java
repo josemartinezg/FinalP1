@@ -107,7 +107,7 @@ public class VerJugadores extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
 							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
-							RegistroJugadores regJug = new RegistroJugadores(aux);
+							RegistroJugadores regJug = RegistroJugadores.getInstance();
 							regJug.setModal(true);
 							regJug.setVisible(true);
 							btnEliminar.setEnabled(false);
