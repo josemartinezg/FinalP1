@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,6 +20,7 @@ import javax.swing.table.TableColumnModel;
 
 import logical.Conferencia;
 import logical.Equipo;
+import logical.Jugador;
 
 public class VerEquipos extends JDialog {
 
@@ -62,6 +64,7 @@ public class VerEquipos extends JDialog {
 						btnModificar.setEnabled(true);
 						int index = table.getSelectedRow();
 						iD = (String)table.getModel().getValueAt(index, 0);
+						//System.out.println(iD);
 						}
 					}
 				});
@@ -126,7 +129,21 @@ public class VerEquipos extends JDialog {
 				getRootPane().setDefaultButton(btnModificar);
 			}
 			{
-				JButton btnEliminar = new JButton("Eliminar");
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!iD.equalsIgnoreCase("")) {
+							Equipo aux = Conferencia.getInstance().buscarEquipos(iD);
+							int borrar = JOptionPane.showConfirmDialog(null, "�Desea eliminar este elemento?" + aux.getNombre(), "Informaci�n", JOptionPane.YES_NO_OPTION);
+							if (borrar == JOptionPane.YES_OPTION) {
+								Conferencia.getInstance().getEquipos().remove(aux);
+								btnEliminar.setEnabled(false);
+								btnModificar.setEnabled(false);
+								loadTable();
+							}
+						}
+					}
+				});
 				buttonPane.add(btnEliminar);
 			}
 			{
@@ -144,7 +161,7 @@ public class VerEquipos extends JDialog {
 	private void loadTable() throws ClassNotFoundException, IOException {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Conferencia.getInstance().getMisJugadores().size(); i++) {
+		for (int i = 0; i < Conferencia.getInstance().getEquipos().size(); i++) {
 			fila[0] = Conferencia.getInstance().getEquipos().get(i).getiD();
 			//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
 			fila[2] = Conferencia.getInstance().getEquipos().get(i).getNombre();
@@ -152,6 +169,7 @@ public class VerEquipos extends JDialog {
 			fila[4] = Conferencia.getInstance().getEquipos().get(i).getEntrenador();
 			model.addRow(fila);
 		}
+		table.setModel(model);
 		TableColumnModel columnModel = table.getColumnModel();
 		//table.setRowHeight(60);
 		columnModel.getColumn(0).setPreferredWidth(70);

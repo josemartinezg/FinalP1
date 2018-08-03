@@ -76,16 +76,21 @@ public class VerJugadores extends JDialog {
 		model.setColumnIdentifiers(columnNames);
 		table.setModel(model);
 		
+		
 		cbxEquipos = new JComboBox();
+		cbxEquipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String equipo = cbxEquipos.getSelectedItem().toString();
+				if (equipo != "<Seleccione un equipo>") {
+					loadTable(equipo);
+				}else {
+					loadTable(null);
+				}
+			}
+		});
 		cbxEquipos.setBounds(220, 11, 250, 22);
 		loadEquipos();
 		panel.add(cbxEquipos);
-		
-		if (cbxEquipos.getSelectedItem().toString() != "<Seleccione un equipo>") {
-			loadTable(cbxEquipos.getSelectedItem().toString());
-		}else {
-			loadTable(null);
-		}
 		
 		{
 			JPanel buttonPane = new JPanel();
@@ -237,32 +242,54 @@ public class VerJugadores extends JDialog {
 	private void loadTable(String equipo) throws ClassNotFoundException, IOException {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Conferencia.getInstance().getMisJugadores().size(); i++) {
-			
-			if (equipo == null) {
+		if (equipo != null) {
+			for (Jugador aux : Conferencia.getInstance().getMisJugadores()) {
+				if (aux.getEquipo() == equipo) {
+					fila[0] = aux.getNumeroCamiseta();
+					fila[2] = aux.getEquipo();
+					fila[3] = aux.getNombre();
+					fila[4] = aux.getApellido();
+					fila[5] = aux.getiD();
+					model.addRow(fila);
+				}
+			}
+		}else {
+			for (int i = 0; i < Conferencia.getInstance().getMisJugadores().size(); i++) {
+				fila[0] = Conferencia.getInstance().getMisJugadores().get(i).getNumeroCamiseta();
+				//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
+				fila[2] = Conferencia.getInstance().getMisJugadores().get(i).getEquipo();
+				fila[3] = Conferencia.getInstance().getMisJugadores().get(i).getNombre();
+				fila[4] = Conferencia.getInstance().getMisJugadores().get(i).getApellido();
+				fila [5] = Conferencia.getInstance().getMisJugadores().get(i).getiD();
+				model.addRow(fila);
+			}
+		}
+		
+		
+		
+			/*if (equipo == null) {
+				for (int i = 0; i < Conferencia.getInstance().sortByLastName().size(); i++) {
 				fila[0] = Conferencia.getInstance().sortByLastName().get(i).getNumeroCamiseta();
 				//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
 				fila[2] = Conferencia.getInstance().sortByLastName().get(i).getEquipo();
 				fila[3] = Conferencia.getInstance().sortByLastName().get(i).getNombre();
 				fila[4] = Conferencia.getInstance().sortByLastName().get(i).getApellido();
 				fila [5] = Conferencia.getInstance().sortByLastName().get(i).getiD();
+				}
 			}else {
-				fila[0] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getNumeroCamiseta();
-				//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
-				fila[2] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getEquipo();
-				fila[3] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getNombre();
-				fila[4] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getApellido();
-				fila [5] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getiD();
-			}
+				for (int i = 0; i < Conferencia.getInstance().getTeamMembers().size(); i++) {
+					fila[0] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getNumeroCamiseta();
+					//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
+					fila[2] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getEquipo();
+					fila[3] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getNombre();
+					fila[4] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getApellido();
+					fila [5] = Conferencia.getInstance().getTeamMembers(equipo).get(i).getiD();
+				}*/
+				
 			
-			/**fila[0] = Conferencia.getInstance().getMisJugadores().get(i).getNumeroCamiseta();
-			//fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getIconImages();
-			fila[2] = Conferencia.getInstance().getMisJugadores().get(i).getEquipo();
-			fila[3] = Conferencia.getInstance().getMisJugadores().get(i).getNombre();
-			fila[4] = Conferencia.getInstance().getMisJugadores().get(i).getApellido();
-			fila [5] = Conferencia.getInstance().getMisJugadores().get(i).getiD();*/
-			model.addRow(fila);
-		}
+			
+			//model.addRow(fila);
+		table.setModel(model);
 		TableColumnModel columnModel = table.getColumnModel();
 		table.setRowHeight(60);
 		columnModel.getColumn(0).setPreferredWidth(60);

@@ -25,6 +25,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RegEquipo extends JDialog {
 
@@ -34,6 +37,7 @@ public class RegEquipo extends JDialog {
 	private JTextField txtEntrenador;
 	private JSpinner spnPresupuesto;
 	private Equipo equipo;
+	private SeleccionImagen selImg = new SeleccionImagen();
 
 	/**
 	 * Launch the application.
@@ -49,9 +53,8 @@ public class RegEquipo extends JDialog {
 		}else {
 			setTitle("Modificación de Jugadores");
 		}
-		setBounds(100, 100, 450, 256);
+		setBounds(100, 100, 500, 398);
 		setLocationRelativeTo(null);
-		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -63,12 +66,12 @@ public class RegEquipo extends JDialog {
 			panel.setLayout(null);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(39, 57, 170, 20);
+			txtNombre.setBounds(29, 57, 170, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
 			txtEstadio = new JTextField();
-			txtEstadio.setBounds(247, 57, 161, 20);
+			txtEstadio.setBounds(29, 173, 170, 20);
 			panel.add(txtEstadio);
 			txtEstadio.setColumns(10);
 			
@@ -79,33 +82,48 @@ public class RegEquipo extends JDialog {
 			
 			JLabel lblEstadio = new JLabel("Estadio:");
 			lblEstadio.setFont(new Font("Dialog", Font.BOLD, 11));
-			lblEstadio.setBounds(237, 32, 73, 14);
+			lblEstadio.setBounds(29, 146, 73, 14);
 			panel.add(lblEstadio);
 			
 			JLabel lblEntrenador = new JLabel("Entrenador:");
 			lblEntrenador.setFont(new Font("Dialog", Font.BOLD, 11));
-			lblEntrenador.setBounds(29, 104, 73, 14);
+			lblEntrenador.setBounds(29, 90, 73, 14);
 			panel.add(lblEntrenador);
 			
 			JLabel lblPresupuesto = new JLabel("Presupuesto (D\u00F3lares):");
 			lblPresupuesto.setFont(new Font("Dialog", Font.BOLD, 11));
-			lblPresupuesto.setBounds(237, 104, 142, 14);
+			lblPresupuesto.setBounds(29, 206, 142, 14);
 			panel.add(lblPresupuesto);
 			
 			txtEntrenador = new JTextField();
-			txtEntrenador.setBounds(39, 129, 170, 20);
+			txtEntrenador.setBounds(29, 117, 170, 20);
 			panel.add(txtEntrenador);
 			txtEntrenador.setColumns(10);
 			
 			spnPresupuesto = new JSpinner();
 			spnPresupuesto.setModel(new SpinnerNumberModel(new Float(100000), new Float(100000), new Float(2147483647), new Float(1000)));
-			spnPresupuesto.setBounds(247, 129, 161, 20);
+			spnPresupuesto.setBounds(39, 231, 161, 20);
 			panel.add(spnPresupuesto);
 			
 			JLabel label = new JLabel("$");
 			label.setFont(new Font("Dialog", Font.BOLD, 11));
-			label.setBounds(237, 132, 28, 14);
+			label.setBounds(29, 237, 28, 14);
 			panel.add(label);
+			
+			JLabel lblCambiarFoto = new JLabel("Cargar Foto");
+			lblCambiarFoto.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					selImg.setVisible(true);
+					selImg.setModal(true);
+				}
+			});
+			lblCambiarFoto.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCambiarFoto.setFont(new Font("Tahoma", Font.PLAIN, 31));
+			lblCambiarFoto.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), Color.GRAY, null, null));
+			lblCambiarFoto.setBounds(235, 47, 220, 219);
+			panel.add(lblCambiarFoto);
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
