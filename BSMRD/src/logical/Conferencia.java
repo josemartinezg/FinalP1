@@ -1,5 +1,13 @@
 package logical;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +16,12 @@ import org.jfree.data.UnknownKeyException;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class Conferencia {
+
+public class Conferencia implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4089348180939898618L;
 	private ArrayList<Juego> juegos;
 	private ArrayList<Jugador> misJugadores;
 	private ArrayList<Equipo> equipos;
@@ -51,7 +64,7 @@ public class Conferencia {
 		return equipos;
 	}
 	
-	public void insertJuego(Juego juego) {
+	public void insertJuego(Juego juego) throws IOException {
 		this.juegos.add(juego);
 		Collections.sort(juegos, new Comparator() {
 			public int compare(Object j1, Object j2) {
@@ -76,22 +89,36 @@ public class Conferencia {
 				return day1.compareTo(day2);
 			}
 		});
+		Conferencia.save();
 	}
 	
-	public void insertEquipo(Equipo equipo) {
+	public void insertEquipo(Equipo equipo) throws IOException {
 		this.equipos.add(equipo);
+		Conferencia.save();
 	}
 	
-	public void removeJuego(Juego juego) {
+	public void removeJuego(Juego juego) throws IOException {
 		this.juegos.remove(juego);
+		Conferencia.save();
 	}
 	
-	public void removeEquipo(Equipo equipo) {
+	public void removeEquipo(Equipo equipo) throws IOException {
 		this.equipos.remove(equipo);
+		Conferencia.save();
 	}
 	
-	public static Conferencia getInstance() {
-		if (conf == null) {
+	public static Conferencia getInstance() throws IOException, ClassNotFoundException {		
+		try {
+			File file = new File("src/data/data.dat");
+			FileInputStream inputStream = new FileInputStream(file);
+			@SuppressWarnings("resource")
+			ObjectInputStream objectInput = new ObjectInputStream(inputStream);
+			conf = (Conferencia) objectInput.readObject();
+			inputStream.close();
+			objectInput.close();
+		} catch (ClassNotFoundException e) {
+			conf = new Conferencia();
+		} catch (Exception e1) {
 			conf = new Conferencia();
 		}
 		return conf;
@@ -108,8 +135,9 @@ public class Conferencia {
 	public ArrayList<Jugador> getMisJugadores() {
 		return misJugadores;
 	}
-	public void setMisJugadores(ArrayList<Jugador> misJugadores) {
+	public void setMisJugadores(ArrayList<Jugador> misJugadores) throws IOException {
 		this.misJugadores = misJugadores;
+		Conferencia.save();
 	}
 	
 	public Juego getProximoJuego() {
@@ -196,12 +224,14 @@ public class Conferencia {
 		return topMasRebotes().get(0);
 	}
 
-	public void modficarJugador(Jugador jugador) {
+	public void modficarJugador(Jugador jugador) throws IOException {
 		int ind = misJugadores.indexOf(jugador);
 		misJugadores.set(ind, jugador);
+		Conferencia.save();
 	}
-	public void addJugador(Jugador nuevoJugador) {
+	public void addJugador(Jugador nuevoJugador) throws IOException {
 		misJugadores.add(nuevoJugador);
+		Conferencia.save();
 	}
 
 	public Jugador buscarJugadores(String iD) {
@@ -221,7 +251,7 @@ public class Conferencia {
 		}
 		return aux;
 	}
-	
+  
 	public ArrayList<Jugador> sortByLastName() {
 		ArrayList<Jugador> aux = misJugadores;
 		Collections.sort(aux, new Comparator() {
@@ -243,6 +273,19 @@ public class Conferencia {
 		}
 		return aux;
 	}
+		
+	public static void save() throws IOException {
+		File file = new File("src/data/data.dat");
+		
+		FileOutputStream outputStream = new FileOutputStream(file);
+		
+		ObjectOutputStream objectOutput = new ObjectOutputStream(outputStream);
+		
+		objectOutput.writeObject(conf);
+		
+		objectOutput.close();
+		outputStream.close();
+  }
 	
 	public DefaultPieDataset getMapLesiones() {
 		
@@ -287,7 +330,6 @@ public class Conferencia {
 		}
 		
 		return aux;
-		
 	}
 
 }
