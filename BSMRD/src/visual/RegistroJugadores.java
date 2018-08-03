@@ -6,8 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -22,12 +26,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
 import logical.Conferencia;
-import logical.Estadistica;
 import logical.FechaSimple;
 import logical.Jugador;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class RegistroJugadores extends JDialog {
 
@@ -46,7 +46,8 @@ public class RegistroJugadores extends JDialog {
 	private JSpinner spnEstatura;
 	private boolean lesionStatus = false;
 	private String tipoLesion = null;
-	private SeleccionImagen selImg = new SeleccionImagen();
+	private SeleccionImagen selImg;
+	private ImageIcon imgIcon;
 	private DefaultComboBoxModel modeloLesiones =
 			new DefaultComboBoxModel(new String[] {"<Sin Lesi\u00F3n>", "Lesi\u00F3n Grado 1", "Lesi\u00F3n Grado 2", "Lesi\u00F3n Grado 3", "Lesi\u00F3n Grado 4", "Lesi\u00F3n Grado 5"});
 	private static RegistroJugadores regJugadores;
@@ -243,8 +244,13 @@ public class RegistroJugadores extends JDialog {
 		lblCambiarFoto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (selImg == null) {
+					selImg = new SeleccionImagen();
+				}
 				selImg.setVisible(true);
 				selImg.setModal(true);
+				imgIcon = new ImageIcon(selImg.file.getAbsolutePath());
+				lblCambiarFoto.setIcon(imgIcon);	
 			}
 		});
 		lblCambiarFoto.setBounds(249, 290, 220, 219);
@@ -287,7 +293,7 @@ public class RegistroJugadores extends JDialog {
 							JOptionPane.showMessageDialog(null, "El jugador no pudo ser creado.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
 							}else {
 								if (jugador == null) {
-									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, lesionStatus, numeroCamiseta, fEstatura, peso, null);
+									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, lesionStatus, numeroCamiseta, fEstatura, peso, imgIcon);
 									try {
 										Conferencia.getInstance().addJugador(nuevoJugador);
 									} catch (ClassNotFoundException e1) {
@@ -349,6 +355,7 @@ public class RegistroJugadores extends JDialog {
 						txtID.setText("");
 						txtID.setEnabled(false);
 						txtID.setEditable(false);
+						lblCambiarFoto.setText("Cargar foto");
 					}
 				});
 				btnRegistrar.setActionCommand("OK");

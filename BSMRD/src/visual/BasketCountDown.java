@@ -1,4 +1,5 @@
 package visual;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,12 +54,28 @@ public class BasketCountDown {
             	 clock.setText(BasketCountDown.digitToTime(minutes) + ":" + BasketCountDown.digitToTime(seconds));
                  seconds--;
               } else if (minutes > 0) {
-            	  BSM.update();
+            	  try {
+					BSM.update();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                   minutes--;
                   seconds = 59;
              } else {
                  running = false;
-                 game.endPeriod();
+                 try {
+					game.endPeriod();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                  reset();
              }
        }

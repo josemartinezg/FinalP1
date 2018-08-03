@@ -49,9 +49,9 @@ public class RegEquipo extends JDialog {
 	public RegEquipo(Equipo equipo) {
 		this.equipo = equipo;
 		if ( equipo == null) {
-			setTitle("Registro de Jugadores");
+			setTitle("Registro de Equipo");
 		}else {
-			setTitle("Modificación de Jugadores");
+			setTitle("Modificación de Equipo");
 		}
 		setBounds(100, 100, 500, 398);
 		setLocationRelativeTo(null);
@@ -149,11 +149,6 @@ public class RegEquipo extends JDialog {
 							}
 							Equipo equipo = new Equipo(nombre, entrenador, presupuesto, estadio, iD);
 							Conferencia.getInstance().insertEquipo(equipo);
-							for (int ind = 0; ind < Conferencia.getInstance().getEquipos().size(); ind++) {
-								System.out.println(Conferencia.getInstance().getEquipos().get(ind).getNombre() + ' ' 
-										+ Conferencia.getInstance().getEquipos().get(ind).getiD()+ ' ' + Conferencia.getInstance().getEquipos().get(ind).getEntrenador()
-										+ "  " +Conferencia.getInstance().getEquipos().size());
-							}
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria.", "Información", JOptionPane.INFORMATION_MESSAGE);
 							clear();
 						} catch (Exception e2) {

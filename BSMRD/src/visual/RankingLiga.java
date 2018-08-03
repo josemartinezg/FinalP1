@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -36,7 +37,7 @@ public class RankingLiga extends JFrame {
 	private JLabel lblRanking;
 	private JFreeChart chart;
 
-	public RankingLiga() {
+	public RankingLiga() throws ClassNotFoundException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 702, 437);
 		contentPane = new JPanel();
