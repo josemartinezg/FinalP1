@@ -42,40 +42,34 @@ public class VerEstadisticas extends JDialog {
 	private int puntos;
 	private int rebotes;
 	private int juegosJugados;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VerEstadisticas dialog = new VerEstadisticas(null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private JLabel lblSinFoto;
 
 	/**
 	 * Create the dialog.
 	 */
 	public VerEstadisticas(Jugador jugador) {
 		this.jugador = jugador;
-		asistencias = jugador.getEstadisticas().getAsistencias();
-		puntos = jugador.getEstadisticas().getTotalPuntos();
-		rebotes = jugador.getEstadisticas().getRebotes();
 		setTitle("Estad\u00EDsticas del Jugador");
 		setBounds(100, 100, 512, 635);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(null);		
+
+		asistencias = jugador.getEstadisticas().getAsistencias();
+		puntos = jugador.getEstadisticas().getTotalPuntos();
+		rebotes = jugador.getEstadisticas().getRebotes();
 		
-		JLabel label = new JLabel("Cargar Foto");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 31));
-		label.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), Color.GRAY, null, null));
-		label.setBounds(12, 13, 220, 219);
-		contentPanel.add(label);
+		try {
+			lblSinFoto = new JLabel(jugador.getFotoPersonal());
+		} catch(Exception e) {
+			lblSinFoto = new JLabel("Sin foto");
+			lblSinFoto.setFont(new Font("Tahoma", Font.PLAIN, 31));
+			lblSinFoto.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), Color.GRAY, null, null));
+		}
+		lblSinFoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSinFoto.setBounds(12, 13, 220, 219);
+		contentPanel.add(lblSinFoto);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 13));
