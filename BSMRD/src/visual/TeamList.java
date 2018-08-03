@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +46,12 @@ public class TeamList {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(
                     list, value, index, isSelected, cellHasFocus);
-            label.setIcon(imageMap.get((String) value));
+//            ImageIcon imgIcon = imageMap.get((String) value);
+//            
+//            Image image = imgIcon.getImage();
+//            Image newImg = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+//            label.setIcon(new ImageIcon(newImg));
+            
             label.setHorizontalTextPosition(JLabel.RIGHT);
             label.setFont(font);
             return label;

@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -37,7 +38,8 @@ public class RegEquipo extends JDialog {
 	private JTextField txtEntrenador;
 	private JSpinner spnPresupuesto;
 	private Equipo equipo;
-	private SeleccionImagen selImg = new SeleccionImagen();
+	private SeleccionImagen selImg;
+	private ImageIcon imgIcon;
 
 	/**
 	 * Launch the application.
@@ -114,8 +116,13 @@ public class RegEquipo extends JDialog {
 			lblCambiarFoto.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					if (selImg == null) {
+						selImg = new SeleccionImagen();
+					}
 					selImg.setVisible(true);
 					selImg.setModal(true);
+					imgIcon = new ImageIcon(selImg.file.getAbsolutePath());
+					lblCambiarFoto.setIcon(imgIcon);	
 				}
 			});
 			lblCambiarFoto.setHorizontalAlignment(SwingConstants.CENTER);

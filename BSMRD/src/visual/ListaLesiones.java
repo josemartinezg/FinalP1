@@ -2,21 +2,21 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import logical.Conferencia;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import logical.Jugador;
 
 public class ListaLesiones extends JDialog {
 
@@ -24,25 +24,19 @@ public class ListaLesiones extends JDialog {
 	private JTable table;
 	private static DefaultTableModel model;
 	private static Object fila[];
+	private static Jugador jugador;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListaLesiones dialog = new ListaLesiones();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public ListaLesiones() {
+	public ListaLesiones(Jugador jugador) {
+		this.jugador = jugador;
 		setBounds(100, 100, 480, 520);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,9 +93,9 @@ public class ListaLesiones extends JDialog {
 		
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Conferencia.getInstance().getMisJugadores().get(i).getMisLesiones().size(); i++) {
-			fila[0] = Conferencia.getInstance().getMisJugadores().get(i).getMisLesiones().get(i).getTipoLesion();
-			fila[1] = Conferencia.getInstance().getMisJugadores().get(i).getMisLesiones().get(i).getTiempoLesionado();
+		for (int i = 0; i < jugador.getMisLesiones().size(); i++) {
+			fila[0] =jugador.getMisLesiones().get(i).getTipoLesion();
+			fila[1] = jugador.getMisLesiones().get(i).getTiempoLesionado();
 			model.addRow(fila);
 		}
 		
