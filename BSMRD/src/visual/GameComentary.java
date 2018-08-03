@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import logical.Equipo;
 import logical.Jugador;
@@ -23,6 +25,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
@@ -86,6 +90,10 @@ public class GameComentary extends JDialog {
 	Integer periodoActual = 1;
 	int maxQuarters = 1;
 	
+	Map localPlayingPlayers;
+	Map awayPlayingPlayers;
+	
+	
 	// Pa TEST
 //	public static void main(String[] args) {
 //		try {
@@ -135,8 +143,12 @@ public class GameComentary extends JDialog {
 	public GameComentary(int quarterDuration, Juego juego) {
 		this.juego = juego;
 		this.quarterDuration = quarterDuration;
+		
 		equipoLocal = juego.getLocal();
 		equipoVisitante = juego.getVisitante();
+		
+		localPlayingPlayers = mapActividad(equipoLocal);
+		awayPlayingPlayers = mapActividad(equipoVisitante);
 		
 		setBounds(100, 100, 1103, 578);
 		setLocationRelativeTo(null);
@@ -204,6 +216,31 @@ public class GameComentary extends JDialog {
 		
 		equipoLocalList = new TeamList(equipoLocal);
 		equipoVisitanteList = new TeamList(equipoVisitante);
+		
+		equipoLocalList.getList().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				if (!event.getValueIsAdjusting()) {
+					Jugador jg = equipoLocalList.getSelectedPlayer();
+					if (!(boolean) localPlayingPlayers.get(jg)) {
+						localPlayingPlayers.put(jg, true);
+						// Aumentar juegos jugados
+					}
+				}
+			}
+		});
+		
+		equipoVisitanteList.getList().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				if (!event.getValueIsAdjusting()) {
+					Jugador jg = equipoVisitanteList.getSelectedPlayer();
+					if (!(boolean) awayPlayingPlayers.get(jg)) {
+						awayPlayingPlayers.put(jg, true);
+						// Aumentar juegos jugados
+					}
+					
+				}
+			}
+		});
 		
 		scollPaneLocal = new JScrollPane(equipoLocalList.getList());
 		scrollPaneVisitante = new JScrollPane(equipoVisitanteList.getList());
@@ -509,6 +546,14 @@ public class GameComentary extends JDialog {
 		contentPanel.add(btnReboteVisitante);
 	}
 
+	private Map mapActividad(Equipo equipo) {
+		Map aux = new HashMap();
+		for(Jugador jg : equipo.getJugadores()) {
+			aux.put(jg, new Boolean(false));
+		}
+		return aux;
+	}
+
 	private void endGame() {
 		// acabar el juego 
 		System.out.println("Fin del juego");
@@ -525,25 +570,11 @@ public class GameComentary extends JDialog {
 		if (totalPointsLocal > totalPointsAway) {
 			juego.getLocal().setJuegosGanados(juego.getLocal().getJuegosGanados() + 1);
 			juego.getVisitante().setJuegosPerdidos(juego.getVisitante().getJuegosPerdidos() + 1);
-		} else if (totalPointsLocal < totalPointsAway) {
+		} else {
 			juego.getVisitante().setJuegosGanados(juego.getVisitante().getJuegosGanados() + 1);
 			juego.getLocal().setJuegosPerdidos(juego.getLocal().getJuegosPerdidos() + 1);
-		} else {
-			// Empate
 		}
 		
-		// Pa Test
-//		System.out.println("Puntaje Final Local: " + juego.getMarcador().getPuntajeLocal());
-//		
-//		for (Jugador jg : juego.getLocal().getJugadores()) {
-//			System.out.println(jg.getNombre()+ ": " + jg.getEstadisticas().getTotalPuntos() + " puntos anotados.");
-//		}
-//		
-//		System.out.println("Puntaje Final Visitante: " + juego.getMarcador().getPuntajeVisitante());
-//		
-//		for (Jugador jg : juego.getVisitante().getJugadores()) {
-//			System.out.println(jg.getNombre()+ ": " + jg.getEstadisticas().getTotalPuntos() + " puntos anotados.");
-//		}
 	}
 	
 	private void disablePointControls() {
