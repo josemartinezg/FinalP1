@@ -63,6 +63,17 @@ public class FechaSimple {
 				this.getYear() == fechaParam.getYear()
 		);
 	}
+	public boolean isBefore(FechaSimple fechaParam) {
+		return (
+				this.getYear() <= fechaParam.getYear() &&
+				((
+						this.getMonth() < fechaParam.getMonth()
+				)|(
+						this.getMonth() == fechaParam.getMonth() &&
+						this.getDay() <= fechaParam.getDay()
+				))
+		);
+	}
 	public Calendar getCalendar() {
 		Calendar currentDate = Calendar.getInstance();
 		currentDate.set(Calendar.DAY_OF_MONTH, day);

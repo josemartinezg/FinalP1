@@ -18,8 +18,10 @@ public class TeamList {
 	private final Map<String, ImageIcon> imageMap;
 	private JList list;
 	private String[] nameListArr;
+	private Equipo equipo;
 	
 	public TeamList(Equipo equipo) {
+		this.equipo = equipo;
 		imageMap = createImageMap(equipo);
 		ArrayList<String> nameList = new ArrayList<String>();
 		for (Jugador j : equipo.getJugadores()) {
@@ -60,5 +62,9 @@ public class TeamList {
 	
 	public JList getList() {
 		return this.list;
+	}
+	
+	public Jugador getSelectedPlayer() {
+		return equipo.getJugadores().get(this.list.getSelectedIndex());
 	}
 }
