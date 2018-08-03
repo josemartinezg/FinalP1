@@ -51,6 +51,9 @@ public class BSM extends JFrame {
 	private Conferencia conferencia;
 	private JMenuItem mntmRegistrarJuego;
 	private JMenuItem mntmListarJuego;
+	private JMenuItem mntmReporteLesionados;
+	private JMenuItem mntmReporteDestacados;
+	private JMenuItem mntmReporteRanking;
 	private static JList listJugadoresDestacados;
 	private static JList listJuegosDeLaSemana;
 	private static int indexJugadoresDestacados=0;
@@ -358,7 +361,89 @@ public class BSM extends JFrame {
 	    mntmListarJuego.setVisible(false);
 	    panelA.add(mntmListarJuego);
 	    
+	    mntmReporteLesionados = new JMenuItem("Jugadores lesionados");
+	    mntmReporteLesionados.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		LesionesPorGrado lesionesPorGrado=null;
+				try {
+					lesionesPorGrado = new LesionesPorGrado();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				lesionesPorGrado.setVisible(true);
+	    	}
+	    });
+	    mntmReporteLesionados.setForeground(new Color(255, 255, 255));
+	    mntmReporteLesionados.setFont(new Font("Segoe UI", Font.BOLD, 20));
+	    mntmReporteLesionados.setOpaque(false);
+	    mntmReporteLesionados.setContentAreaFilled(false);
+	    mntmReporteLesionados.setBorderPainted(false);
+	    mntmReporteLesionados.setBounds(1050, 117, 226, 79);
+	    mntmReporteLesionados.setVisible(false);
+	    panelA.add(mntmReporteLesionados);
+	    
+	    mntmReporteDestacados = new JMenuItem("Jugadores destacados");
+	    mntmReporteDestacados.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		TopFivePorcentajeTiro topFivePorcentajeTiro=null;
+				try {
+					topFivePorcentajeTiro = new TopFivePorcentajeTiro();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				topFivePorcentajeTiro.setVisible(true);
+	    	}
+	    });
+	    mntmReporteDestacados.setForeground(new Color(255, 255, 255));
+	    mntmReporteDestacados.setFont(new Font("Segoe UI", Font.BOLD, 20));
+	    mntmReporteDestacados.setOpaque(false);
+	    mntmReporteDestacados.setContentAreaFilled(false);
+	    mntmReporteDestacados.setBorderPainted(false);
+	    mntmReporteDestacados.setBounds(1050, 167, 226, 79);
+	    mntmReporteDestacados.setVisible(false);
+	    panelA.add(mntmReporteDestacados);
+	    
+	    mntmReporteRanking = new JMenuItem("Ranking de la liga");
+	    mntmReporteRanking.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		RankingLiga rankingLiga=null;
+				try {
+					rankingLiga = new RankingLiga();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				rankingLiga.setVisible(true);
+	    	}
+	    });
+	    mntmReporteRanking.setForeground(new Color(255, 255, 255));
+	    mntmReporteRanking.setFont(new Font("Segoe UI", Font.BOLD, 20));
+	    mntmReporteRanking.setOpaque(false);
+	    mntmReporteRanking.setContentAreaFilled(false);
+	    mntmReporteRanking.setBorderPainted(false);
+	    mntmReporteRanking.setBounds(1050, 217, 226, 79);
+	    mntmReporteRanking.setVisible(false);
+	    panelA.add(mntmReporteRanking);
+	    
 	    JButton btnReportes = new JButton("Reportes");
+	    btnReportes.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		mntmReporteDestacados.setVisible(!mntmReporteDestacados.isVisible());
+	    		mntmReporteLesionados.setVisible(!mntmReporteLesionados.isVisible());
+	    		mntmReporteRanking.setVisible(!mntmReporteRanking.isVisible());
+	    	}
+	    });
 	    btnReportes.setOpaque(false);
 	    btnReportes.setForeground(Color.WHITE);
 	    btnReportes.setFont(new Font("Lucida Bright", Font.BOLD, 34));

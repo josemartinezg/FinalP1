@@ -45,7 +45,7 @@ public class Jugador implements Serializable {
 		this.estatura = estatura;
 		this.peso = peso;
 		this.fotoPersonal = foto;
-		misLesiones = new ArrayList();
+		misLesiones = new ArrayList<Lesion>();
 	}
 	public String getNombre() {
 		return nombre;
