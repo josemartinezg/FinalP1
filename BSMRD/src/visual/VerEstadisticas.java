@@ -217,21 +217,21 @@ public class VerEstadisticas extends JDialog {
 		
 		txtAPJ = new JTextField();
 		txtAPJ.setEditable(false);
-		txtAPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(asistencias)));
+	//	txtAPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(asistencias)));
 		txtAPJ.setColumns(10);
 		txtAPJ.setBounds(334, 379, 100, 22);
 		contentPanel.add(txtAPJ);
 		
 		txtRPJ = new JTextField();
 		txtRPJ.setEditable(false);
-		txtRPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(rebotes)));
+	//	txtRPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(rebotes)));
 		txtRPJ.setColumns(10);
 		txtRPJ.setBounds(171, 379, 100, 22);
 		contentPanel.add(txtRPJ);
 		
 		txtPPJ = new JTextField();
 		txtPPJ.setEditable(false);
-		txtPPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos)));
+	//	txtPPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos)));
 		txtPPJ.setColumns(10);
 		txtPPJ.setBounds(12, 379, 100, 22);
 		contentPanel.add(txtPPJ);
