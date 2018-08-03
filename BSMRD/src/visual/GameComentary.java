@@ -62,26 +62,27 @@ public class GameComentary extends JDialog {
 	private JButton localTwo;
 	private JButton localThree;
 	private JButton localMinusOne;
-	
+
 	private JComboBox cbxJugadaLocal;
 	private JComboBox cbxJugadaVisitante;
-	
+
 	private JButton awayOne;
 	private JButton awayTwo;
 	private JButton awayThree;
 	private JButton awayMinusOne;
-	
+
 	private JButton okButton;
 	private JButton cancelButton;
-	
+
 	private JButton btnAsistenciaLocal;
 	private JButton btnReboteLocal;
 	private JButton btnAsistenciaVisitante;
 	private JButton btnReboteVisitante;
-	
+
 	private Juego juego;
 	private BasketCountDown countDown;
 	private int quarterDuration;
+	
 	private static Equipo equipoLocal;
 	private static Equipo equipoVisitante;
 	
@@ -92,53 +93,64 @@ public class GameComentary extends JDialog {
 	Map localPlayingPlayers;
 	Map awayPlayingPlayers;
 	
-	
 	// Pa TEST
-//	public static void main(String[] args) {
-//		try {
-//			// DATA PRUEBA
-//			ImageIcon imgKoopa = new ImageIcon(GameComentary.class.getResource("/visual/players/Koopa.png"));
-//			ImageIcon imgBowser = new ImageIcon(GameComentary.class.getResource("/visual/players/Bowser.png"));
-//			ImageIcon imgLuigi = new ImageIcon(GameComentary.class.getResource("/visual/players/Luigi.png"));
-//			ImageIcon imgMario = new ImageIcon(GameComentary.class.getResource("/visual/players/Mario.png"));
-//			ImageIcon imgPeach = new ImageIcon(GameComentary.class.getResource("/visual/players/Peach.png"));
-//			
-//			Jugador j1 = new Jugador("Koopa", "Ortiz", "123", "Warriors", new FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgKoopa);
-//			Jugador j2 = new Jugador("Bowser", "Ortiz", "123", "Warriors", new FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgBowser);
-//			Jugador j3 = new Jugador("Mario", "Ortiz", "123", "Warriors", new FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgMario);
-//			Jugador j4 = new Jugador("Luigi", "Ortiz", "123", "Warriors", new FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgLuigi);
-//			Jugador j5 = new Jugador("Peach", "Ortiz", "123", "Warriors", new FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgPeach);
-//			
-//			Equipo eq1 = new Equipo("Equipo 1", "Entrenador 1", "Estadio 1");
-//			Equipo eq2 = new Equipo("Equipo 2", "Entrenador 2", "Estadio 2");
-//			
-//			eq1.setLogo(new ImageIcon(GameComentary.class.getResource("/visual/teams/nba_golden_state_warriors_200x.png")));
-//			eq2.setLogo(new ImageIcon(GameComentary.class.getResource("/visual/teams/nba_golden_state_warriors_200x.png")));
-//			
-//			eq1.addJugador(j1);
-//			eq1.addJugador(j2);
-//			eq1.addJugador(j3);
-//			eq1.addJugador(j4);
-//			eq1.addJugador(j5);
-//			
-//			eq2.addJugador(j5);
-//			eq2.addJugador(j4);
-//			eq2.addJugador(j3);
-//			eq2.addJugador(j2);
-//			eq2.addJugador(j1);
-//			Juego jg = new Juego("Estadio 1", eq1, eq2, null);
-//			
-//			
-//			
-//			GameComentary dialog = new GameComentary(3, jg);
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
+	// public static void main(String[] args) {
+	// try {
+	// // DATA PRUEBA
+	// ImageIcon imgKoopa = new
+	// ImageIcon(GameComentary.class.getResource("/visual/players/Koopa.png"));
+	// ImageIcon imgBowser = new
+	// ImageIcon(GameComentary.class.getResource("/visual/players/Bowser.png"));
+	// ImageIcon imgLuigi = new
+	// ImageIcon(GameComentary.class.getResource("/visual/players/Luigi.png"));
+	// ImageIcon imgMario = new
+	// ImageIcon(GameComentary.class.getResource("/visual/players/Mario.png"));
+	// ImageIcon imgPeach = new
+	// ImageIcon(GameComentary.class.getResource("/visual/players/Peach.png"));
+	//
+	// Jugador j1 = new Jugador("Koopa", "Ortiz", "123", "Warriors", new
+	// FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgKoopa);
+	// Jugador j2 = new Jugador("Bowser", "Ortiz", "123", "Warriors", new
+	// FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgBowser);
+	// Jugador j3 = new Jugador("Mario", "Ortiz", "123", "Warriors", new
+	// FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgMario);
+	// Jugador j4 = new Jugador("Luigi", "Ortiz", "123", "Warriors", new
+	// FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgLuigi);
+	// Jugador j5 = new Jugador("Peach", "Ortiz", "123", "Warriors", new
+	// FechaSimple(11, 8, 2018), 500, "Liga 1", false, 23, 10, 50, imgPeach);
+	//
+	// Equipo eq1 = new Equipo("Equipo 1", "Entrenador 1", "Estadio 1");
+	// Equipo eq2 = new Equipo("Equipo 2", "Entrenador 2", "Estadio 2");
+	//
+	// eq1.setLogo(new
+	// ImageIcon(GameComentary.class.getResource("/visual/teams/nba_golden_state_warriors_200x.png")));
+	// eq2.setLogo(new
+	// ImageIcon(GameComentary.class.getResource("/visual/teams/nba_golden_state_warriors_200x.png")));
+	//
+	// eq1.addJugador(j1);
+	// eq1.addJugador(j2);
+	// eq1.addJugador(j3);
+	// eq1.addJugador(j4);
+	// eq1.addJugador(j5);
+	//
+	// eq2.addJugador(j5);
+	// eq2.addJugador(j4);
+	// eq2.addJugador(j3);
+	// eq2.addJugador(j2);
+	// eq2.addJugador(j1);
+	// Juego jg = new Juego("Estadio 1", eq1, eq2, null);
+	//
+	//
+	//
+	// GameComentary dialog = new GameComentary(3, jg);
+	// dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	//
+	// dialog.setVisible(true);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+
 	public GameComentary(int quarterDuration, Juego juego) {
 		this.juego = juego;
 		this.quarterDuration = quarterDuration;
@@ -156,7 +168,7 @@ public class GameComentary extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		lblAway = new JLabel("Visitante");
 		lblAway.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAway.setFont(new Font("Tahoma", Font.PLAIN, 23));
@@ -169,23 +181,22 @@ public class GameComentary extends JDialog {
 			lblLocal.setBounds(10, 14, 87, 37);
 			contentPanel.add(lblLocal);
 		}
-		
+
 		textPaneTime = new JTextPane();
 		textPaneTime.setForeground(Color.RED);
 		textPaneTime.setFont(new Font("Seven Segment", Font.BOLD, 50));
 		textPaneTime.setText("00:00");
-
-		
+		textPaneTime.setFont(new Font("Verdana", Font.PLAIN, 37));
 		textPaneTime.setEditable(false);
 		textPaneTime.setBounds(489, 0, 110, 58);
 		contentPanel.add(textPaneTime);
-		
+
 		lblPeriod = new JLabel("Periodo");
 		lblPeriod.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblPeriod.setBounds(506, 59, 75, 31);
 
 		contentPanel.add(lblPeriod);
-		
+
 		textPanePeriod = new JTextPane();
 		textPanePeriod.setForeground(Color.RED);
 		textPanePeriod.setEditable(false);
@@ -195,7 +206,7 @@ public class GameComentary extends JDialog {
 		textPanePeriod.setBounds(534, 92, 21, 37);
 
 		contentPanel.add(textPanePeriod);
-		
+
 		txtLocalPoints = new JTextField();
 		txtLocalPoints.setEditable(false);
 		txtLocalPoints.setForeground(Color.GREEN);
@@ -204,7 +215,7 @@ public class GameComentary extends JDialog {
 		txtLocalPoints.setBounds(139, 12, 68, 39);
 		contentPanel.add(txtLocalPoints);
 		txtLocalPoints.setColumns(10);
-		
+
 		txtAwayPoints = new JTextField();
 		txtAwayPoints.setForeground(Color.GREEN);
 		txtAwayPoints.setText("0");
@@ -213,7 +224,7 @@ public class GameComentary extends JDialog {
 		txtAwayPoints.setColumns(10);
 		txtAwayPoints.setBounds(880, 12, 68, 39);
 		contentPanel.add(txtAwayPoints);
-		
+
 		equipoLocalList = new TeamList(equipoLocal);
 		equipoVisitanteList = new TeamList(equipoVisitante);
 		
@@ -223,7 +234,7 @@ public class GameComentary extends JDialog {
 					Jugador jg = equipoLocalList.getSelectedPlayer();
 					if (!(boolean) localPlayingPlayers.get(jg)) {
 						localPlayingPlayers.put(jg, true);
-						// Aumentar juegos jugados
+						jg.getEstadisticas().aumentarJuegos();
 					}
 				}
 			}
@@ -235,7 +246,7 @@ public class GameComentary extends JDialog {
 					Jugador jg = equipoVisitanteList.getSelectedPlayer();
 					if (!(boolean) awayPlayingPlayers.get(jg)) {
 						awayPlayingPlayers.put(jg, true);
-						// Aumentar juegos jugados
+						jg.getEstadisticas().aumentarJuegos();
 					}
 					
 				}
@@ -244,25 +255,23 @@ public class GameComentary extends JDialog {
 		
 		scollPaneLocal = new JScrollPane(equipoLocalList.getList());
 		scrollPaneVisitante = new JScrollPane(equipoVisitanteList.getList());
-		
+
 		scollPaneLocal.setBounds(10, 59, 197, 339);
 		contentPanel.add(scollPaneLocal);
-		
+
 		lblLocalLogo = new JLabel("");
 		lblLocalLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocalLogo.setIcon(equipoLocal.getLogo());
 		scollPaneLocal.setColumnHeaderView(lblLocalLogo);
-		
+
 		scrollPaneVisitante.setBounds(880, 59, 197, 339);
 		contentPanel.add(scrollPaneVisitante);
-		
+
 		lblVisitanteLogo = new JLabel("");
 		lblVisitanteLogo.setIcon(equipoVisitante.getLogo());
 		lblVisitanteLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPaneVisitante.setColumnHeaderView(lblVisitanteLogo);
-		
-		
-		
+
 		localOne = new JButton("");
 		localOne.setEnabled(false);
 		localOne.addActionListener(new ActionListener() {
@@ -270,22 +279,22 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoLocalList.getSelectedPlayer();
 					if (cbxJugadaLocal.getSelectedIndex() == 0) {
-						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText())+1));
+						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText()) + 1));
 						auxJugador.getEstadisticas().addTiro(1, true);
-						
+
 					} else {
 						auxJugador.getEstadisticas().addTiro(1, false);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
-				
+
 			}
 		});
 		localOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/1-c.png")));
 		localOne.setBounds(10, 451, 32, 32);
 		contentPanel.add(localOne);
-		
+
 		localTwo = new JButton("");
 		localTwo.setEnabled(false);
 		localTwo.addActionListener(new ActionListener() {
@@ -293,7 +302,7 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoLocalList.getSelectedPlayer();
 					if (cbxJugadaLocal.getSelectedIndex() == 0) {
-						txtLocalPoints.setText( Integer.toString(Integer.parseInt(txtLocalPoints.getText())+2));
+						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText()) + 2));
 						auxJugador.getEstadisticas().addTiro(2, true);
 					} else {
 						auxJugador.getEstadisticas().addTiro(2, false);
@@ -306,7 +315,7 @@ public class GameComentary extends JDialog {
 		localTwo.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/2-c.png")));
 		localTwo.setBounds(64, 451, 32, 32);
 		contentPanel.add(localTwo);
-		
+
 		localThree = new JButton("");
 		localThree.setEnabled(false);
 		localThree.addActionListener(new ActionListener() {
@@ -314,7 +323,7 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoLocalList.getSelectedPlayer();
 					if (cbxJugadaLocal.getSelectedIndex() == 0) {
-						txtLocalPoints.setText( Integer.toString(Integer.parseInt(txtLocalPoints.getText())+3));
+						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText()) + 3));
 						auxJugador.getEstadisticas().addTiro(3, true);
 					} else {
 						auxJugador.getEstadisticas().addTiro(3, false);
@@ -328,7 +337,7 @@ public class GameComentary extends JDialog {
 		localThree.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/numbers-3-black-icon(1).png")));
 		localThree.setBounds(119, 451, 32, 32);
 		contentPanel.add(localThree);
-		
+
 		localMinusOne = new JButton("");
 		localMinusOne.setEnabled(false);
 		localMinusOne.addActionListener(new ActionListener() {
@@ -336,10 +345,10 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoLocalList.getSelectedPlayer();
 					if (Integer.parseInt(txtLocalPoints.getText()) > 0) {
-						txtLocalPoints.setText( Integer.toString(Integer.parseInt(txtLocalPoints.getText())-1));
+						txtLocalPoints.setText(Integer.toString(Integer.parseInt(txtLocalPoints.getText()) - 1));
 						auxJugador.getEstadisticas().addTiro(-1, true);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -347,7 +356,7 @@ public class GameComentary extends JDialog {
 		localMinusOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/backspace_web_remove_pixel_per.png")));
 		localMinusOne.setBounds(176, 451, 32, 32);
 		contentPanel.add(localMinusOne);
-		
+
 		awayOne = new JButton("");
 		awayOne.setEnabled(false);
 		awayOne.addActionListener(new ActionListener() {
@@ -355,12 +364,12 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoVisitanteList.getSelectedPlayer();
 					if (cbxJugadaVisitante.getSelectedIndex() == 0) {
-						txtAwayPoints.setText( Integer.toString(Integer.parseInt(txtAwayPoints.getText())+1));
+						txtAwayPoints.setText(Integer.toString(Integer.parseInt(txtAwayPoints.getText()) + 1));
 						auxJugador.getEstadisticas().addTiro(1, true);
 					} else {
 						auxJugador.getEstadisticas().addTiro(1, false);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -368,7 +377,7 @@ public class GameComentary extends JDialog {
 		awayOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/1-c.png")));
 		awayOne.setBounds(880, 451, 32, 32);
 		contentPanel.add(awayOne);
-		
+
 		awayTwo = new JButton("");
 		awayTwo.setEnabled(false);
 		awayTwo.addActionListener(new ActionListener() {
@@ -376,12 +385,12 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoVisitanteList.getSelectedPlayer();
 					if (cbxJugadaVisitante.getSelectedIndex() == 0) {
-						txtAwayPoints.setText( Integer.toString(Integer.parseInt(txtAwayPoints.getText())+2));
+						txtAwayPoints.setText(Integer.toString(Integer.parseInt(txtAwayPoints.getText()) + 2));
 						auxJugador.getEstadisticas().addTiro(2, true);
 					} else {
 						auxJugador.getEstadisticas().addTiro(2, false);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -389,7 +398,7 @@ public class GameComentary extends JDialog {
 		awayTwo.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/2-c.png")));
 		awayTwo.setBounds(939, 451, 32, 32);
 		contentPanel.add(awayTwo);
-		
+
 		awayThree = new JButton("");
 		awayThree.setEnabled(false);
 		awayThree.addActionListener(new ActionListener() {
@@ -397,12 +406,12 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoVisitanteList.getSelectedPlayer();
 					if (cbxJugadaVisitante.getSelectedIndex() == 0) {
-						txtAwayPoints.setText( Integer.toString(Integer.parseInt(txtAwayPoints.getText())+3));
+						txtAwayPoints.setText(Integer.toString(Integer.parseInt(txtAwayPoints.getText()) + 3));
 						auxJugador.getEstadisticas().addTiro(3, true);
 					} else {
 						auxJugador.getEstadisticas().addTiro(3, false);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -410,7 +419,7 @@ public class GameComentary extends JDialog {
 		awayThree.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/numbers-3-black-icon(1).png")));
 		awayThree.setBounds(992, 451, 32, 32);
 		contentPanel.add(awayThree);
-		
+
 		awayMinusOne = new JButton("");
 		awayMinusOne.setEnabled(false);
 		awayMinusOne.addActionListener(new ActionListener() {
@@ -418,10 +427,10 @@ public class GameComentary extends JDialog {
 				try {
 					Jugador auxJugador = equipoVisitanteList.getSelectedPlayer();
 					if (Integer.parseInt(txtAwayPoints.getText()) > 0) {
-						txtAwayPoints.setText(Integer.toString(Integer.parseInt(txtAwayPoints.getText())-1));
+						txtAwayPoints.setText(Integer.toString(Integer.parseInt(txtAwayPoints.getText()) - 1));
 						auxJugador.getEstadisticas().addTiro(-1, true);
 					}
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -429,7 +438,7 @@ public class GameComentary extends JDialog {
 		awayMinusOne.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/backspace_web_remove_pixel_per.png")));
 		awayMinusOne.setBounds(1046, 451, 32, 32);
 		contentPanel.add(awayMinusOne);
-		
+
 		separator_1 = new JSeparator();
 		separator_1.setBounds(0, 304, 590, -9);
 		contentPanel.add(separator_1);
@@ -462,29 +471,30 @@ public class GameComentary extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
+
 		countDown = new BasketCountDown(quarterDuration, 0, textPaneTime, this);
-		
+
 		cbxJugadaLocal = new JComboBox();
 		cbxJugadaLocal.setEnabled(false);
-		cbxJugadaLocal.setModel(new DefaultComboBoxModel(new String[] {"Anotacion", "Intento"}));
+		cbxJugadaLocal.setModel(new DefaultComboBoxModel(new String[] { "Anotacion", "Intento" }));
 		cbxJugadaLocal.setBounds(10, 409, 197, 29);
 		contentPanel.add(cbxJugadaLocal);
-		
+
 		cbxJugadaVisitante = new JComboBox();
 		cbxJugadaVisitante.setEnabled(false);
-		cbxJugadaVisitante.setModel(new DefaultComboBoxModel(new String[] {"Anotacion", "Intento"}));
-		cbxJugadaVisitante.setBounds(880, 412, 197, 26);
+		cbxJugadaVisitante.setModel(new DefaultComboBoxModel(new String[] { "Anotacion", "Intento" }));
+		cbxJugadaVisitante.setBounds(880, 412, 197, 20);
 		contentPanel.add(cbxJugadaVisitante);
-		
+
 		btnAsistenciaLocal = new JButton("");
 		btnAsistenciaLocal.setToolTipText("Marcar Asistencia");
 		btnAsistenciaLocal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					equipoLocalList.getSelectedPlayer().getEstadisticas().addAsistencias();
-					System.out.println(equipoLocalList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
-				} catch(IndexOutOfBoundsException e) {
+					System.out.println(
+							equipoLocalList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
+				} catch (IndexOutOfBoundsException e) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -493,7 +503,7 @@ public class GameComentary extends JDialog {
 		btnAsistenciaLocal.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/assist_icon.png")));
 		btnAsistenciaLocal.setBounds(237, 59, 90, 85);
 		contentPanel.add(btnAsistenciaLocal);
-		
+
 		btnReboteLocal = new JButton("");
 		btnReboteLocal.setToolTipText("Marcar Rebote");
 		btnReboteLocal.addActionListener(new ActionListener() {
@@ -501,7 +511,7 @@ public class GameComentary extends JDialog {
 				try {
 					equipoLocalList.getSelectedPlayer().getEstadisticas().addRebotes();
 					System.out.println(equipoLocalList.getSelectedPlayer().getNombre() + " ha conseguido un rebote.");
-				} catch(IndexOutOfBoundsException error) {
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -510,15 +520,16 @@ public class GameComentary extends JDialog {
 		btnReboteLocal.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/rebote_local.png")));
 		btnReboteLocal.setBounds(237, 313, 90, 85);
 		contentPanel.add(btnReboteLocal);
-		
+
 		btnAsistenciaVisitante = new JButton("");
 		btnAsistenciaVisitante.setToolTipText("Marcar Asistencia");
 		btnAsistenciaVisitante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					equipoVisitanteList.getSelectedPlayer().getEstadisticas().addAsistencias();
-					System.out.println(equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
-				} catch(IndexOutOfBoundsException error) {
+					System.out.println(
+							equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido una asistencia.");
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -527,15 +538,16 @@ public class GameComentary extends JDialog {
 		btnAsistenciaVisitante.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/assist_icon.png")));
 		btnAsistenciaVisitante.setBounds(763, 59, 90, 85);
 		contentPanel.add(btnAsistenciaVisitante);
-		
+
 		btnReboteVisitante = new JButton("");
 		btnReboteVisitante.setToolTipText("Marcar Rebote");
 		btnReboteVisitante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					equipoVisitanteList.getSelectedPlayer().getEstadisticas().addRebotes();
-					System.out.println(equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido un rebote.");
-				} catch(IndexOutOfBoundsException error) {
+					System.out
+							.println(equipoVisitanteList.getSelectedPlayer().getNombre() + " ha conseguido un rebote.");
+				} catch (IndexOutOfBoundsException error) {
 					System.out.println("Ningun jugador seleccionado");
 				}
 			}
@@ -555,18 +567,18 @@ public class GameComentary extends JDialog {
 	}
 
 	private void endGame() {
-		// acabar el juego 
+		// acabar el juego
 		System.out.println("Fin del juego");
 		cancelButton.setEnabled(true);
 		disablePointControls();
-		
+
 		int totalPointsLocal = Integer.parseInt(txtLocalPoints.getText());
 		int totalPointsAway = Integer.parseInt(txtAwayPoints.getText());
-		
+
 		juego.getMarcador().setPuntajeLocal(totalPointsLocal);
 		juego.getMarcador().setPuntajeVisitante(totalPointsAway);
 		juego.setOcurrido(true);
-		
+
 		if (totalPointsLocal > totalPointsAway) {
 			juego.getLocal().setJuegosGanados(juego.getLocal().getJuegosGanados() + 1);
 			juego.getVisitante().setJuegosPerdidos(juego.getVisitante().getJuegosPerdidos() + 1);
@@ -574,43 +586,42 @@ public class GameComentary extends JDialog {
 			juego.getVisitante().setJuegosGanados(juego.getVisitante().getJuegosGanados() + 1);
 			juego.getLocal().setJuegosPerdidos(juego.getLocal().getJuegosPerdidos() + 1);
 		}
-		
 	}
-	
+
 	private void disablePointControls() {
 		localOne.setEnabled(false);
 		localTwo.setEnabled(false);
 		localThree.setEnabled(false);
 		localMinusOne.setEnabled(false);
-		
+
 		awayOne.setEnabled(false);
 		awayTwo.setEnabled(false);
 		awayThree.setEnabled(false);
 		awayMinusOne.setEnabled(false);
-		
+
 		cbxJugadaLocal.setEnabled(false);
 		cbxJugadaVisitante.setEnabled(false);
-		
+
 		btnAsistenciaLocal.setEnabled(false);
 		btnReboteLocal.setEnabled(false);
 		btnAsistenciaVisitante.setEnabled(false);
 		btnReboteVisitante.setEnabled(false);
 	}
-	
+
 	private void enablePointControls() {
 		localOne.setEnabled(true);
 		localTwo.setEnabled(true);
 		localThree.setEnabled(true);
 		localMinusOne.setEnabled(true);
-		
+
 		awayOne.setEnabled(true);
 		awayTwo.setEnabled(true);
 		awayThree.setEnabled(true);
 		awayMinusOne.setEnabled(true);
-		
+
 		cbxJugadaLocal.setEnabled(true);
 		cbxJugadaVisitante.setEnabled(true);
-		
+
 		btnAsistenciaLocal.setEnabled(true);
 		btnReboteLocal.setEnabled(true);
 		btnAsistenciaVisitante.setEnabled(true);
@@ -639,12 +650,32 @@ public class GameComentary extends JDialog {
         	disablePointControls();
         }
 		
+		if (periodoActual >= maxQuarters && !juegoEmpate()) {
+			this.endGame();
+		} else if (periodoActual >= maxQuarters && juegoEmpate()) {
+			int tiempoExtra = Integer.parseInt(textPanePeriod.getText());
+			if (!extraTime) {
+				countDown.setDefaultMinutes(quarterDuration / 3);
+				lblPeriod.setText("Tiempo Extra Nº");
+				extraTime = true;
+				textPanePeriod.setText(Integer.toString(1));
+				okButton.setText("Iniciar OT");
+			} else
+				textPanePeriod.setText(Integer.toString(tiempoExtra + 1));
+			okButton.setEnabled(true);
+			disablePointControls();
+		} else {
+			periodoActual += 1;
+			textPanePeriod.setText(Integer.toString(periodoActual));
+			okButton.setEnabled(true);
+			disablePointControls();
+		}
 	}
-	
+
 	public boolean juegoEmpate() {
 		int totalPointsLocal = Integer.parseInt(txtLocalPoints.getText());
 		int totalPointsAway = Integer.parseInt(txtAwayPoints.getText());
-		
+
 		return totalPointsLocal == totalPointsAway;
 	}
 

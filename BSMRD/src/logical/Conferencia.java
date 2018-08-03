@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.jfree.data.UnknownKeyException;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 public class Conferencia implements Serializable {
 	/**
 	 * 
@@ -183,6 +188,30 @@ public class Conferencia implements Serializable {
 		return aux;
 	}
 	
+	public ArrayList<Jugador> topPorcentajeTiro() {
+		ArrayList<Jugador> aux = misJugadores;
+		Collections.sort(aux, new Comparator() {
+			public int compare(Object j1, Object j2) {
+				Float pt = ((Jugador) j1).getEstadisticas().getPorcentajeTiro();
+				Float pt2 = ((Jugador) j2).getEstadisticas().getPorcentajeTiro();
+				return pt.compareTo(pt2);
+			}
+		});
+		return aux;
+	}
+	
+	public ArrayList<Equipo> topEquipos() {
+		ArrayList<Equipo> aux = equipos;
+		Collections.sort(aux, new Comparator() {
+			public int compare(Object j1, Object j2) {
+				Float wr = ((Equipo) j1).getWinRate();
+				Float wr2 = ((Equipo) j2).getWinRate();
+				return wr.compareTo(wr2);
+			}
+		});
+		return aux;
+	}
+	
 	public Jugador jugadorMasPuntos() {
 		return topMasPuntos().get(0);
 	}
@@ -222,8 +251,7 @@ public class Conferencia implements Serializable {
 		}
 		return aux;
 	}
-
-
+  
 	public ArrayList<Jugador> sortByLastName() {
 		ArrayList<Jugador> aux = misJugadores;
 		Collections.sort(aux, new Comparator() {
@@ -257,6 +285,51 @@ public class Conferencia implements Serializable {
 		
 		objectOutput.close();
 		outputStream.close();
+  }
+	
+	public DefaultPieDataset getMapLesiones() {
+		
+		DefaultPieDataset aux = new DefaultPieDataset();
+		
+		for (Jugador jg : misJugadores) {
+			for (Lesion ls : jg.getMisLesiones()) {
+				int actualValue = 0;
+				try {
+					actualValue = (int) aux.getValue("Grado " + ls.getGradoLesion());
+				} catch(UnknownKeyException error) {
+				} finally {
+					aux.setValue("Grado " + ls.getGradoLesion(), new Integer(actualValue+1));
+				}
+			}
+		}
+		
+		return aux;
+		
+	}
+	
+	public DefaultCategoryDataset getMapTopFive() {
+		DefaultCategoryDataset aux = new DefaultCategoryDataset();
+		
+		ArrayList<Jugador> mejores = topPorcentajeTiro();
+		for(int i=0; i<5;i++) {
+			Jugador jg = mejores.get(i);
+			aux.addValue((double) jg.getEstadisticas().getTotalPuntos(), jg.getNombre() + " " + jg.getApellido(), "Puntos");
+			aux.addValue((double) jg.getEstadisticas().getRebotes(), jg.getNombre() + " " + jg.getApellido(), "Rebotes");
+			aux.addValue((double) jg.getEstadisticas().getAsistencias(), jg.getNombre() + " " + jg.getApellido(), "Asistencias");
+		}
+		
+		return aux;
+	}
+	
+	public DefaultCategoryDataset getRanking() {
+		DefaultCategoryDataset aux = new DefaultCategoryDataset();
+		
+		for (Equipo eq : equipos) {
+			aux.addValue((double) eq.getJuegosGanados(), "Juegos ganados", eq.getNombre());
+			aux.addValue((double) eq.getJuegosPerdidos(), "Juegos perdidos", eq.getNombre());
+		}
+		
+		return aux;
 	}
 
 }
