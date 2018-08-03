@@ -67,6 +67,12 @@ public class VerJugadores extends JDialog {
 					btnEstadsticas.setEnabled(true);
 					int index = table.getSelectedRow();
 					iD = (String)table.getModel().getValueAt(index, 5);
+					try {
+						Conferencia.save();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

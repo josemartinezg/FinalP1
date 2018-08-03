@@ -41,7 +41,8 @@ public class BSM extends JFrame {
 	 * @wbp.nonvisual location=150,99
 	 */
 	private JPanel panelA;
-	private GameComentary gameComentary=null;
+	private static GameComentary gameComentary=null;
+	private static Juego proximoJuego = null;
 	private RegistroJugadores registroJugadores=null;
 	private JMenuItem mntmRegistrarEquipo;
 	private JMenuItem mntmListarEquipo;
@@ -53,13 +54,14 @@ public class BSM extends JFrame {
 	private JMenuItem mntmReporteLesionados;
 	private JMenuItem mntmReporteDestacados;
 	private JMenuItem mntmReporteRanking;
-	private JList listJugadoresDestacados;
+	private static JList listJugadoresDestacados;
 	private static JList listJuegosDeLaSemana;
-	private int indexJugadoresDestacados=0;
+	private static int indexJugadoresDestacados=0;
 	private static JLabel lblPuntosEquipoLocal;
 	private static JLabel lblPuntosEquipoVisitante;
 	private static JLabel lblLogoEquipoLocal;
 	private static JLabel lblLogoEquipoVisitante;
+	private static JButton btnIniciarSiguienteJuego;
 
 	/**
 	 * Launch the application.
@@ -68,11 +70,9 @@ public class BSM extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Conferencia conf = Conferencia.getInstance();
-					BSM frame = new BSM(conf);
+					BSM frame = new BSM();
 					frame.setVisible(true);
 					//BORRAR ESTA LINEA
-					frame.setExtendedState(MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,8 +84,7 @@ public class BSM extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BSM(Conferencia conf) {
-		conferencia = conf;
+	public BSM() {
 		setTitle("Basketball Statistical Manager RD");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 800);
@@ -515,11 +514,19 @@ public class BSM extends JFrame {
 	    });
 	    panelA.add(btnClose);
 	    
-	    JButton btnIniciarSiguienteJuego = new JButton("Iniciar siguiente juego");
+	    btnIniciarSiguienteJuego = new JButton("Iniciar siguiente juego");
 	    btnIniciarSiguienteJuego.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		if (gameComentary == null) {
-	    			Juego proximoJuego = conferencia.getProximoJuego();
+					try {
+						proximoJuego = Conferencia.getInstance().getProximoJuego();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 		    		gameComentary = new GameComentary(10, proximoJuego);
 		    		btnIniciarSiguienteJuego.setText("Ver juego en curso");
 	    		}
@@ -535,20 +542,20 @@ public class BSM extends JFrame {
 		
 	}
 	
-	private void fillJugDestacados() throws ClassNotFoundException, IOException {
+	static void fillJugDestacados() throws ClassNotFoundException, IOException {
 		ArrayList<Jugador> jugadores = null;
 		Jugador tempJugador = null;
 		String tempString = "";
 		String[] values;
 		switch(indexJugadoresDestacados) {
 			case 0:
-				jugadores = Conferencia.getInstance().topMasPuntos();
+				jugadores = Conferencia.getInstance().getInstance().topMasPuntos();
 				break;
 			case 1:
-				jugadores = Conferencia.getInstance().topMasAsistencias();
+				jugadores = Conferencia.getInstance().getInstance().topMasAsistencias();
 				break;
 			case 2:
-				jugadores = Conferencia.getInstance().topMasRebotes();
+				jugadores = Conferencia.getInstance().getInstance().topMasRebotes();
 				break;
 		}
 		values = new String[jugadores.size()];
@@ -597,9 +604,13 @@ public class BSM extends JFrame {
 		
 	}
 
-	public static void update() {
+	public static void update() throws ClassNotFoundException, IOException {
 		lblPuntosEquipoLocal.setText(GameComentary.getPuntajeLocal());
 		lblPuntosEquipoVisitante.setText(GameComentary.getPuntajeVisitante());
+		if (proximoJuego.isOcurrido()) {
+			gameComentary = null;
+			btnIniciarSiguienteJuego.setText("Iniciar siguiente juego");
+		}
 		//ESTAS LINEAS SERAN USADAS CUANDO SE MEJORE EL SISTEMA DE LOGOS
 //		lblLogoEquipoLocal.setIcon(GameComentary.getLogoLocal());
 //		lblLogoEquipoVisitante.setIcon(GameComentary.getLogoVisitante());

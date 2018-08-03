@@ -82,10 +82,6 @@ public class VerEquipos extends JDialog {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				{
-					table = new JTable();
-					scrollPane.setViewportView(table);
-				}
 			}
 		}
 		{
@@ -136,12 +132,12 @@ public class VerEquipos extends JDialog {
 							Equipo aux = null;
 							try {
 								aux = Conferencia.getInstance().buscarEquipos(iD);
-							} catch (ClassNotFoundException e2) {
+							} catch (ClassNotFoundException e1) {
 								// TODO Auto-generated catch block
-								e2.printStackTrace();
-							} catch (IOException e2) {
+								e1.printStackTrace();
+							} catch (IOException e1) {
 								// TODO Auto-generated catch block
-								e2.printStackTrace();
+								e1.printStackTrace();
 							}
 							int borrar = JOptionPane.showConfirmDialog(null, "�Desea eliminar este elemento?" + aux.getNombre(), "Informaci�n", JOptionPane.YES_NO_OPTION);
 							if (borrar == JOptionPane.YES_OPTION) {
@@ -166,6 +162,12 @@ public class VerEquipos extends JDialog {
 									e1.printStackTrace();
 								}
 							}
+						}
+						try {
+							Conferencia.save();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 					}
 				});
