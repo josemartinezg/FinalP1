@@ -1,6 +1,12 @@
 package logical;
 
-public class Juego {
+import java.io.Serializable;
+
+public class Juego implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2399864853701574515L;
 	private String estadio;
 	private Equipo local;
 	private Equipo visitante; 

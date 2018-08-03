@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -69,7 +70,19 @@ public class VerEquipos extends JDialog {
 				String[] columnNames = {"ID", "Logo", "Nombre", "Estadio", "Entrenador"};
 				model.setColumnIdentifiers(columnNames);
 				table.setModel(model);
-				loadTable();
+				try {
+					loadTable();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				{
+					table = new JTable();
+					scrollPane.setViewportView(table);
+				}
 			}
 		}
 		{
@@ -81,13 +94,30 @@ public class VerEquipos extends JDialog {
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
-							Equipo aux = Conferencia.getInstance().buscarEquipos(iD);
+							Equipo aux = null;
+							try {
+								aux = Conferencia.getInstance().buscarEquipos(iD);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							RegEquipo regEquipo = new RegEquipo(aux);
 							regEquipo.setModal(true);
 							regEquipo.setVisible(true);
 							btnEliminar.setEnabled(false);
 							btnModificar.setEnabled(false);
-							loadTable();
+							try {
+								loadTable();
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						}
 					}
 				});
@@ -111,7 +141,7 @@ public class VerEquipos extends JDialog {
 			}
 		}
 	}
-	private void loadTable() {
+	private void loadTable() throws ClassNotFoundException, IOException {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Conferencia.getInstance().getMisJugadores().size(); i++) {

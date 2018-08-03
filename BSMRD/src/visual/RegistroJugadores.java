@@ -27,6 +27,7 @@ import logical.FechaSimple;
 import logical.Jugador;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class RegistroJugadores extends JDialog {
 
@@ -287,7 +288,15 @@ public class RegistroJugadores extends JDialog {
 							}else {
 								if (jugador == null) {
 									Jugador nuevoJugador = new Jugador(nombre, apellido, equipo, iD, fechaNacimiento, salarioAnual, ligaProveniente, lesionStatus, numeroCamiseta, fEstatura, peso, null);
-									Conferencia.getInstance().addJugador(nuevoJugador);
+									try {
+										Conferencia.getInstance().addJugador(nuevoJugador);
+									} catch (ClassNotFoundException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
 									clean();
 									if ( lesionStatus == true ) {
@@ -306,7 +315,15 @@ public class RegistroJugadores extends JDialog {
 									jugador.setLigaProveniente(ligaProveniente);
 									jugador.setNumeroCamiseta(numeroCamiseta);
 									jugador.setFechaNacimiento(fechaNacimiento);
-									Conferencia.getInstance().modficarJugador(jugador);
+									try {
+										Conferencia.getInstance().modficarJugador(jugador);
+									} catch (ClassNotFoundException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 									JOptionPane.showMessageDialog(null, "Jugador modificado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
 								}
 							}
@@ -369,8 +386,16 @@ public class RegistroJugadores extends JDialog {
 		}
 	}
 	private void loadEquipos() {
-		for (int i = 0; i < Conferencia.getInstance().getEquipos().size(); i++) {
-			cbxEquipo.addItem(Conferencia.getInstance().getEquipos().get(i).getNombre());
+		try {
+			for (int i = 0; i < Conferencia.getInstance().getEquipos().size(); i++) {
+					cbxEquipo.addItem(Conferencia.getInstance().getEquipos().get(i).getNombre());
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		cbxEquipo.insertItemAt("<Seleccione un equipo>", 0);
 		cbxEquipo.setSelectedIndex(0);

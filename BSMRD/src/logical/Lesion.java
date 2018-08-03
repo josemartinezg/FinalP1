@@ -1,8 +1,12 @@
 package logical;
 
-import java.util.Calendar;
+import java.io.Serializable;
 
-public class Lesion {
+public class Lesion implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1931014929479886626L;
 	private String tipoLesion;
 	private int gradoLesion;
 	private FechaSimple fechaInicio;

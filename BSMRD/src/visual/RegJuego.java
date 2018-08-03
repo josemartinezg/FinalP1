@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.awt.event.ItemEvent;
 
 public class RegJuego extends JDialog {
@@ -40,8 +41,10 @@ public class RegJuego extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public RegJuego() {
+	public RegJuego() throws ClassNotFoundException, IOException {
 		setTitle("Programar un juego");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
@@ -69,7 +72,16 @@ public class RegJuego extends JDialog {
 		cbxLocal = new JComboBox();
 		cbxLocal.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				Equipo local = Conferencia.getInstance().buscarEquipos(cbxLocal.getSelectedItem().toString());
+				Equipo local=null;
+				try {
+					local = Conferencia.getInstance().buscarEquipos(cbxLocal.getSelectedItem().toString());
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				txtEstadio.setText(local.getEstadio());
 			}
 		});
@@ -175,7 +187,7 @@ public class RegJuego extends JDialog {
 		cbxAnno.setModel(new DefaultComboBoxModel(new String[] {"2018", "2019"}));
 	}
 	
-	private void fillEquipos() {
+	private void fillEquipos() throws ClassNotFoundException, IOException {
 		Conferencia conf = Conferencia.getInstance();
 		String[] model;
 		model = new String[conf.getEquipos().size()+1];
@@ -187,7 +199,7 @@ public class RegJuego extends JDialog {
 		cbxVisitante.setModel(new DefaultComboBoxModel(model));
 	}
 	
-	public void clear() {
+	public void clear() throws ClassNotFoundException, IOException {
 		txtEstadio.setText("");
 		cbxDia.setSelectedIndex(0);
 		cbxMes.setSelectedIndex(0);
