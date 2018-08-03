@@ -63,7 +63,6 @@ public class VerEstadisticas extends JDialog {
 		asistencias = jugador.getEstadisticas().getAsistencias();
 		puntos = jugador.getEstadisticas().getTotalPuntos();
 		rebotes = jugador.getEstadisticas().getRebotes();
-		juegosJugados = jugador.getEstadisticas().getJuegosJugados();
 		setTitle("Estad\u00EDsticas del Jugador");
 		setBounds(100, 100, 512, 635);
 		getContentPane().setLayout(new BorderLayout());
@@ -218,21 +217,21 @@ public class VerEstadisticas extends JDialog {
 		
 		txtAPJ = new JTextField();
 		txtAPJ.setEditable(false);
-		txtAPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(asistencias, juegosJugados)));
+		txtAPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(asistencias)));
 		txtAPJ.setColumns(10);
 		txtAPJ.setBounds(334, 379, 100, 22);
 		contentPanel.add(txtAPJ);
 		
 		txtRPJ = new JTextField();
 		txtRPJ.setEditable(false);
-		txtRPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(rebotes, juegosJugados)));
+		txtRPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(rebotes)));
 		txtRPJ.setColumns(10);
 		txtRPJ.setBounds(171, 379, 100, 22);
 		contentPanel.add(txtRPJ);
 		
 		txtPPJ = new JTextField();
 		txtPPJ.setEditable(false);
-		txtPPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos, juegosJugados)));
+		txtPPJ.setText(String.valueOf(jugador.getEstadisticas().calcAnotacionesPorJuego(puntos)));
 		txtPPJ.setColumns(10);
 		txtPPJ.setBounds(12, 379, 100, 22);
 		contentPanel.add(txtPPJ);
@@ -240,7 +239,7 @@ public class VerEstadisticas extends JDialog {
 		txtPTT = new JTextField();
 		txtPTT.setEditable(false);
 		//Ajustar método
-		txtPTT.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
+		txtPTT.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego()));
 		txtPTT.setColumns(10);
 		txtPTT.setBounds(334, 457, 100, 22);
 		contentPanel.add(txtPTT);
@@ -248,7 +247,7 @@ public class VerEstadisticas extends JDialog {
 		txtPTC = new JTextField();
 		txtPTC.setEditable(false);
 		//Ajustar Método
-		txtPTC.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
+		txtPTC.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego()));
 		txtPTC.setColumns(10);
 		txtPTC.setBounds(171, 457, 100, 22);
 		contentPanel.add(txtPTC);
@@ -256,7 +255,7 @@ public class VerEstadisticas extends JDialog {
 		txtPTL = new JTextField();
 		txtPTL.setEditable(false);
 		//Ajustar Método
-		txtPTL.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego(juegosJugados)));
+		txtPTL.setText(String.valueOf(jugador.getEstadisticas().puntosPorJuego()));
 		txtPTL.setColumns(10);
 		txtPTL.setBounds(12, 457, 100, 22);
 		contentPanel.add(txtPTL);

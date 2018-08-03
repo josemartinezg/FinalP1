@@ -1,10 +1,16 @@
 package logical;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Equipo {
+@SuppressWarnings("serial")
+public class Equipo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8597768696638689042L;
 	private String nombre;
 	private  ArrayList<Jugador> jugadores;
 	private String entrenador; 
@@ -102,5 +108,8 @@ public class Equipo {
 	}
 	public void setiD(String iD) {
 		this.iD = iD;
+	}
+	public float getWinRate() {
+		return (float) juegosGanados/juegosPerdidos;
 	}
 }

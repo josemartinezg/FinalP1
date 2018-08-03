@@ -1,8 +1,13 @@
 package logical;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class FechaSimple {
+public class FechaSimple implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7812819969076791903L;
 	private int day;
 	private int month;
 	private int year;

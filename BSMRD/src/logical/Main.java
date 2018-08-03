@@ -1,10 +1,12 @@
 package logical;
 
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 //		Estadistica estadisticas = new Estadistica(0, 0, 0, 0, 0, 0, 0, 0, 0);
 //		Lesion lesion = new Lesion("mala", 10, Calendar.getInstance(), 20, Calendar.getInstance(), "una vaina feisima", true);

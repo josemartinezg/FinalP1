@@ -1,6 +1,12 @@
 package logical;
 
-public class Marcador {
+import java.io.Serializable;
+
+public class Marcador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1675431704272136554L;
 	private int puntajeVisitante; 
 	private int puntajeLocal;
 	

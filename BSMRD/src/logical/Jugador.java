@@ -2,11 +2,16 @@ package logical;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Jugador {
+public class Jugador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8301729437146772302L;
 	private String nombre; 
 	private String apellido;
 	private String equipo;
@@ -40,6 +45,7 @@ public class Jugador {
 		this.estatura = estatura;
 		this.peso = peso;
 		this.fotoPersonal = foto;
+		misLesiones = new ArrayList();
 	}
 	public String getNombre() {
 		return nombre;

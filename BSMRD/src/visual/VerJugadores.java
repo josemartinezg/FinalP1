@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -34,23 +35,12 @@ public class VerJugadores extends JDialog {
 	private JButton btnReporteLesiones;
 	private JButton btnEstadsticas;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VerJugadores dialog = new VerJugadores();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**46366
 	 * Create the dialog.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public VerJugadores() {
+	public VerJugadores() throws ClassNotFoundException, IOException {
 		setTitle("Visualizar Jugadores");
 		setBounds(100, 100, 720, 480);
 		getContentPane().setLayout(new BorderLayout());
@@ -111,7 +101,15 @@ public class VerJugadores extends JDialog {
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
-							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							try {
+								Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							RegistroJugadores regJug = RegistroJugadores.getInstance();
 							regJug.setModal(true);
 							regJug.setVisible(true);
@@ -119,7 +117,15 @@ public class VerJugadores extends JDialog {
 							btnModificar.setEnabled(false);
 							btnReporteLesiones.setEnabled(false);
 							btnEstadsticas.setEnabled(false);
-							loadTable(null);
+							try {
+								loadTable(null);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						}
 					}	
 				});
@@ -127,20 +133,44 @@ public class VerJugadores extends JDialog {
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
-				
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
-							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							Jugador aux = null;
+							try {
+								aux = Conferencia.getInstance().buscarJugadores(iD);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							int borrar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este elemento?" + aux.getNombre(), "Información", JOptionPane.YES_NO_OPTION);
 							if (borrar == JOptionPane.YES_OPTION) {
-								Conferencia.getInstance().getMisJugadores().remove(aux);
+								try {
+									Conferencia.getInstance().getMisJugadores().remove(aux);
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								btnEliminar.setEnabled(false);
 								btnModificar.setEnabled(false);
 								btnReporteLesiones.setEnabled(false);
 								btnEstadsticas.setEnabled(false);
-								loadTable(null);
+								try {
+									loadTable(null);
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 							}
 						}
 					}
@@ -152,13 +182,20 @@ public class VerJugadores extends JDialog {
 				btnReporteLesiones.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (!iD.equalsIgnoreCase("")) {
-							Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							try {
+								Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							//ControlLesiones ctrlLesiones = new ControlLesiones(aux, modelLesion, tipoLesion)
 							btnEliminar.setEnabled(false);
 							btnModificar.setEnabled(false);
 							btnReporteLesiones.setEnabled(false);
 							btnEstadsticas.setEnabled(false);
-							
 						}
 					}
 				});
@@ -168,7 +205,16 @@ public class VerJugadores extends JDialog {
 				btnEstadsticas = new JButton("Estad\u00EDsticas");
 				btnEstadsticas.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Jugador aux = Conferencia.getInstance().buscarJugadores(iD);
+						Jugador aux = null;
+						try {
+							aux = Conferencia.getInstance().buscarJugadores(iD);
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						VerEstadisticas verStats = new VerEstadisticas(aux);
 						verStats.setVisible(true);
 						btnEliminar.setEnabled(false);
@@ -193,7 +239,7 @@ public class VerJugadores extends JDialog {
 		}
 	}
 
-	private void loadTable(String equipo) {
+	private void loadTable(String equipo) throws ClassNotFoundException, IOException {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		if (equipo != null) {
@@ -253,7 +299,7 @@ public class VerJugadores extends JDialog {
 		columnModel.getColumn(4).setPreferredWidth(170);
 		columnModel.getColumn(5).setPreferredWidth(120);
 	}
-	private void loadEquipos() {
+	private void loadEquipos() throws ClassNotFoundException, IOException {
 		for (int i = 0; i < Conferencia.getInstance().getEquipos().size(); i++) {
 			cbxEquipos.addItem(Conferencia.getInstance().getEquipos().get(i).getNombre());
 		}

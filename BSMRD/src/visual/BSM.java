@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -201,11 +202,6 @@ public class BSM extends JFrame {
 	    panelA.add(lblLogoEquipoVisitante);
 	    
 	    JButton btnJuegosDeLa = new JButton("Juegos de la semana");
-	    btnJuegosDeLa.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		fillJuegosSemana();
-	    	}
-	    });
 	    btnJuegosDeLa.setForeground(Color.BLACK);
 	    btnJuegosDeLa.setFont(headerListFont.deriveFont(Font.BOLD, 30));
 	    btnJuegosDeLa.setBorderPainted(false);
@@ -219,6 +215,15 @@ public class BSM extends JFrame {
 	    listJuegosDeLaSemana.setForeground(Color.BLACK);
 	    listJuegosDeLaSemana.setFont(listFont.deriveFont(Font.ITALIC, 20));
 	    listJuegosDeLaSemana.setBackground(new Color(255, 255, 204));
+	    try {
+			fillJuegosSemana();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	    panelA.add(listJuegosDeLaSemana);
 	    
 	    JButton btnJugadoresDestacados = new JButton("Jugadores destacados");
@@ -235,7 +240,15 @@ public class BSM extends JFrame {
 	    listJugadoresDestacados.setFont(listFont.deriveFont(Font.ITALIC, 20));
 	    listJugadoresDestacados.setBackground(new Color(255, 255, 204));
 	    listJugadoresDestacados.setBounds(0, 598, 407, 202);
-	    fillJugDestacados();
+	    try {
+			fillJugDestacados();
+		} catch (ClassNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 	    panelA.add(listJugadoresDestacados);
 	    
 	    mntmRegistrarEquipo = new JMenuItem("Registrar equipo");
@@ -289,7 +302,16 @@ public class BSM extends JFrame {
 	    mntmListarJugador = new JMenuItem("Listar jugadores");
 	    mntmListarJugador.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		VerJugadores verJugadores = new VerJugadores();
+	    		VerJugadores verJugadores = null;
+				try {
+					verJugadores = new VerJugadores();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    		verJugadores.setVisible(true);
 	    	}
 	    });
@@ -305,7 +327,16 @@ public class BSM extends JFrame {
 	    mntmRegistrarJuego = new JMenuItem("Programar un juego");
 	    mntmRegistrarJuego.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		RegJuego regJuego = new RegJuego();
+	    		RegJuego regJuego=null;
+				try {
+					regJuego = new RegJuego();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    		regJuego.setVisible(true);
 	    	}
 	    });
@@ -342,7 +373,15 @@ public class BSM extends JFrame {
 	    btnSiguienteCategoria.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		indexJugadoresDestacados = indexJugadoresDestacados > 1 ? 0 : indexJugadoresDestacados+1;
-	    		fillJugDestacados();
+	    		try {
+					fillJugDestacados();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    	}
 	    });
 	    btnSiguienteCategoria.setForeground(Color.BLACK);
@@ -356,7 +395,15 @@ public class BSM extends JFrame {
 	    btnAnteriorCategoria.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		indexJugadoresDestacados = indexJugadoresDestacados < 1 ? 2 : indexJugadoresDestacados-1;
-	    		fillJugDestacados();
+	    		try {
+					fillJugDestacados();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    	}
 	    });
 	    btnAnteriorCategoria.setForeground(Color.BLACK);
@@ -403,7 +450,7 @@ public class BSM extends JFrame {
 		
 	}
 	
-	private void fillJugDestacados() {
+	private void fillJugDestacados() throws ClassNotFoundException, IOException {
 		ArrayList<Jugador> jugadores = null;
 		Jugador tempJugador = null;
 		String tempString = "";
@@ -446,7 +493,7 @@ public class BSM extends JFrame {
 	    });
 	}
 	
-	public static void fillJuegosSemana() {
+	public static void fillJuegosSemana() throws ClassNotFoundException, IOException {
 		ArrayList<Juego> juegos = Conferencia.getInstance().getJuegosSemana();
 		String[] values = new String[juegos.size()];
 		
