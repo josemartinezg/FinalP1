@@ -14,13 +14,13 @@ public class SeleccionImagen extends JDialog {
 	public File file;
 	private final JPanel contentPanel = new JPanel();
 	public SeleccionImagen() {
-		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 641, 481);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
+//		setAlwaysOnTop(true);
+//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//		setBounds(100, 100, 641, 481);
+//		getContentPane().setLayout(new BorderLayout());
+//		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		getContentPane().add(contentPanel, BorderLayout.CENTER);
+//		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			fileChooser = new JFileChooser();
 			int result = fileChooser.showOpenDialog(this);

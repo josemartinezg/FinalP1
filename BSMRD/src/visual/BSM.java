@@ -510,6 +510,8 @@ public class BSM extends JFrame {
 				try {
 					if(registroJugadores!=null)
 						registroJugadores.dispose();
+					if(gameComentary!=null)
+						gameComentary.dispose();
 					dispose();
 				} catch (Exception e2) {
 					System.out.println(e2);

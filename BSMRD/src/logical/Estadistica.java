@@ -132,8 +132,8 @@ public class Estadistica implements Serializable {
 	}
 	
 	public float calcAnotacionesPorJuego(int anotacion) {
-		float anotacionPorJuego = anotacion/juegosJugados;
-		if (anotacion != 0 || juegosJugados != 0) {
+		float anotacionPorJuego;
+		if (anotacion != 0 && juegosJugados != 0) {
 			anotacionPorJuego = anotacion/juegosJugados;
 		}else {
 			anotacionPorJuego = 0;

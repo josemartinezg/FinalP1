@@ -259,18 +259,8 @@ public class GameComentary extends JDialog {
 		scollPaneLocal.setBounds(10, 59, 197, 339);
 		contentPanel.add(scollPaneLocal);
 
-		lblLocalLogo = new JLabel("");
-		lblLocalLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLocalLogo.setIcon(equipoLocal.getLogo());
-		scollPaneLocal.setColumnHeaderView(lblLocalLogo);
-
 		scrollPaneVisitante.setBounds(880, 59, 197, 339);
 		contentPanel.add(scrollPaneVisitante);
-
-		lblVisitanteLogo = new JLabel("");
-		lblVisitanteLogo.setIcon(equipoVisitante.getLogo());
-		lblVisitanteLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scrollPaneVisitante.setColumnHeaderView(lblVisitanteLogo);
 
 		localOne = new JButton("");
 		localOne.setEnabled(false);
@@ -556,6 +546,18 @@ public class GameComentary extends JDialog {
 		btnReboteVisitante.setIcon(new ImageIcon(GameComentary.class.getResource("/visual/rebote_visitante.png")));
 		btnReboteVisitante.setBounds(763, 313, 90, 85);
 		contentPanel.add(btnReboteVisitante);
+		
+				lblLocalLogo = new JLabel("");
+				lblLocalLogo.setBounds(222, 169, 177, 124);
+				contentPanel.add(lblLocalLogo);
+				lblLocalLogo.setHorizontalAlignment(SwingConstants.CENTER);
+				lblLocalLogo.setIcon(equipoLocal.getLogo());
+				
+						lblVisitanteLogo = new JLabel("");
+						lblVisitanteLogo.setBounds(696, 169, 177, 124);
+						contentPanel.add(lblVisitanteLogo);
+						lblVisitanteLogo.setIcon(equipoVisitante.getLogo());
+						lblVisitanteLogo.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 	private Map mapActividad(Equipo equipo) {

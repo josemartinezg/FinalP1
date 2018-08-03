@@ -121,8 +121,7 @@ public class RegEquipo extends JDialog {
 					}
 					selImg.setVisible(true);
 					selImg.setModal(true);
-					imgIcon = new ImageIcon(selImg.file.getAbsolutePath());
-					lblCambiarFoto.setIcon(imgIcon);	
+					lblCambiarFoto.setIcon(new ImageIcon(selImg.file.getAbsolutePath()));
 				}
 			});
 			lblCambiarFoto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,6 +154,10 @@ public class RegEquipo extends JDialog {
 								throw new Exception();
 							}
 							Equipo equipo = new Equipo(nombre, entrenador, presupuesto, estadio, iD);
+							try {
+								equipo.setLogo(new ImageIcon(selImg.file.getAbsolutePath()));
+							} catch(Exception e1) {
+							}
 							Conferencia.getInstance().insertEquipo(equipo);
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria.", "Información", JOptionPane.INFORMATION_MESSAGE);
 							clear();
