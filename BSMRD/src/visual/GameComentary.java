@@ -40,8 +40,8 @@ import javax.swing.DefaultComboBoxModel;
 public class GameComentary extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtLocalPoints;
-	private JTextField txtAwayPoints;
+	private static JTextField txtLocalPoints;
+	private static JTextField txtAwayPoints;
 	private JLabel lblAway;
 	private JSeparator separator;
 	private JSeparator separator_1;
@@ -79,8 +79,8 @@ public class GameComentary extends JDialog {
 	private Juego juego;
 	private BasketCountDown countDown;
 	private int quarterDuration;
-	private Equipo equipoLocal;
-	private Equipo equipoVisitante;
+	private static Equipo equipoLocal;
+	private static Equipo equipoVisitante;
 	
 	boolean extraTime = false;
 	Integer periodoActual = 1;
@@ -615,5 +615,21 @@ public class GameComentary extends JDialog {
 		int totalPointsAway = Integer.parseInt(txtAwayPoints.getText());
 		
 		return totalPointsLocal == totalPointsAway;
+	}
+
+	public static String getPuntajeLocal() {
+		return txtLocalPoints.getText();
+	}
+
+	public static String getPuntajeVisitante() {
+		return txtAwayPoints.getText();
+	}
+	
+	public static ImageIcon getLogoLocal() {
+		return equipoLocal.getLogo();
+	}
+
+	public static ImageIcon getLogoVisitante() {
+		return equipoVisitante.getLogo();
 	}
 }

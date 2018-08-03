@@ -53,6 +53,7 @@ public class BasketCountDown {
             	 clock.setText(BasketCountDown.digitToTime(minutes) + ":" + BasketCountDown.digitToTime(seconds));
                  seconds--;
               } else if (minutes > 0) {
+            	  BSM.update();
                   minutes--;
                   seconds = 59;
              } else {

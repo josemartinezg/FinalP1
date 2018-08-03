@@ -6,7 +6,7 @@ public class Juego {
 	private Equipo visitante; 
 	private FechaSimple fecha;
 	private Marcador marcador;
-	private boolean ocurrido = false;
+	private boolean ocurrido;
 	public Juego(String estadio, Equipo local, Equipo visitante, FechaSimple fecha) {
 		super();
 		this.estadio = estadio;
@@ -14,6 +14,7 @@ public class Juego {
 		this.visitante = visitante;
 		this.fecha = fecha;
 		this.marcador = new Marcador();
+		this.ocurrido = false;
 	}
 	public String getEstadio() {
 		return estadio;
