@@ -42,6 +42,7 @@ public class RegistroJugadores extends JDialog {
 	private JTextField txtNumeroCamiseta;
 	private JComboBox cbxLesiones;
 	private Jugador jugador;
+	private JSpinner spnEstatura;
 	private boolean lesionStatus = false;
 	private String tipoLesion = null;
 	private SeleccionImagen selImg = new SeleccionImagen();
@@ -68,8 +69,8 @@ public class RegistroJugadores extends JDialog {
 		}else {
 			setTitle("Modificación de Jugadores");
 		}
-		
 		setBounds(100, 100, 512, 635);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -84,7 +85,8 @@ public class RegistroJugadores extends JDialog {
 		
 		cbxEquipo = new JComboBox();
 		cbxEquipo.setBounds(12, 56, 467, 22);
-		cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>", "Golden State Warriors", "San Antonio Spurs"}));
+		loadEquipos();
+		//cbxEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione un equipo>", "Golden State Warriors", "San Antonio Spurs"}));
 		contentPanel.add(cbxEquipo);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -99,11 +101,17 @@ public class RegistroJugadores extends JDialog {
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(12, 113, 230, 22);
+		if (jugador != null) {
+			txtNombre.setText(jugador.getNombre());
+		}
 		contentPanel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtApellido = new JTextField();
 		txtApellido.setBounds(249, 113, 230, 22);
+		if (jugador != null) {
+			txtApellido.setText(jugador.getApellido());
+		}
 		txtApellido.setColumns(10);
 		contentPanel.add(txtApellido);
 		
@@ -125,6 +133,9 @@ public class RegistroJugadores extends JDialog {
 		
 		txtID = new JTextField();
 		txtID.setBounds(12, 487, 149, 22);
+		if (jugador != null) {
+			txtID.setText(jugador.getiD());
+		}
 		txtID.setEditable(false);
 		txtID.setEnabled(false);
 		txtID.setEnabled(false);
@@ -151,7 +162,11 @@ public class RegistroJugadores extends JDialog {
 		
 		cbxLigaOrigen = new JComboBox();
 		cbxLigaOrigen.setBounds(12, 179, 230, 22);
-		cbxLigaOrigen.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione una Liga>", "G League", "Summer League", "JBA", "International Agency", ""}));
+		cbxLigaOrigen.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione una Liga>", "Gatorade Development League\t(G-League)", "Summer League", "International Free Agency", "Junior Basketball Association"}));
+		if (jugador != null) {
+			cbxLigaOrigen.setEnabled(false);
+			cbxLigaOrigen.setModel(new DefaultComboBoxModel(new String[] {jugador.getLigaProveniente()}));;
+		}
 		contentPanel.add(cbxLigaOrigen);
 		
 		JLabel lblLesiones = new JLabel("Lesiones Activas:");
@@ -178,16 +193,28 @@ public class RegistroJugadores extends JDialog {
 		JComboBox cbxAnno = new JComboBox();
 		cbxAnno.setModel(new DefaultComboBoxModel(new String[] {"AAAA", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "PS C:\\Users\\Jos\u00E9 Manuel Mart\u00EDnez> & C:/Python27/python.exe \"c:/Users/Jos\u00E9 Manuel Mart\u00EDnez/Desktop/Local Version Control/Cicle.py\"", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"}));
 		cbxAnno.setBounds(136, 243, 85, 22);
+		if (jugador != null) {
+			cbxAnno.setEnabled(false);
+			cbxAnno.setModel(new DefaultComboBoxModel(new String[] {String.valueOf(jugador.getFechaNacimiento().getYear())}));
+		}
 		contentPanel.add(cbxAnno);
 		
 		JComboBox cbxMes = new JComboBox();
 		cbxMes.setModel(new DefaultComboBoxModel(new String[] {"MM", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
 		cbxMes.setBounds(73, 243, 51, 22);
+		if (jugador != null) {
+			cbxMes.setEnabled(false);
+			cbxMes.setModel(new DefaultComboBoxModel(new String[] {String.valueOf(jugador.getFechaNacimiento().getMonth())}));
+		}
 		contentPanel.add(cbxMes);
 		
 		cbxDia = new JComboBox();
 		cbxDia.setModel(new DefaultComboBoxModel(new String[] {"DD", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		cbxDia.setBounds(12, 243, 49, 22);
+		if (jugador != null) {
+			cbxDia.setEnabled(false);
+			cbxDia.setModel(new DefaultComboBoxModel(new String[] {String.valueOf(jugador.getFechaNacimiento().getDay())}));
+		}
 		contentPanel.add(cbxDia);
 		
 		JLabel lblFechaNacim = new JLabel("Fecha de Nacimiento:");
@@ -195,8 +222,11 @@ public class RegistroJugadores extends JDialog {
 		lblFechaNacim.setBounds(12, 218, 144, 16);
 		contentPanel.add(lblFechaNacim);
 		
-		JSpinner spnEstatura = new JSpinner();
-		spnEstatura.setModel(new SpinnerListModel(new String[] {"5.7'", "5.8'", "5.9'", "6.0'", "6.1'", "6.2'", "6.3'", "6.4'", "6.5'", "6.6'", "6.7'"}));
+		spnEstatura = new JSpinner();
+		spnEstatura.setModel(new SpinnerListModel(new String[] {"5.7'", "5.8'", "5.9'", "5.10'", "5.11'", "6.0'", "6.1'", "6.2'", "6.3'", "6.4'", "6.5'", "6.6'", "6.7'", "6.8'", "6.9'", "6.10'", "6.11'", "7.0'", "7.1'", "7.2'", "7.3'", "7.4'", "7.5'", "7.6'", "7.7'"}));
+		if (jugador != null) {
+			spnEstatura.setEnabled(false);
+		}
 		spnEstatura.setBounds(249, 243, 83, 22);
 		contentPanel.add(spnEstatura);
 		

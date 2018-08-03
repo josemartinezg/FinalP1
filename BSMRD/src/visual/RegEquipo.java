@@ -33,6 +33,7 @@ public class RegEquipo extends JDialog {
 	private JTextField txtEstadio;
 	private JTextField txtEntrenador;
 	private JSpinner spnPresupuesto;
+	private Equipo equipo;
 
 	/**
 	 * Launch the application.
@@ -41,8 +42,13 @@ public class RegEquipo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegEquipo() {
-		setTitle("Registrar equipo");
+	public RegEquipo(Equipo equipo) {
+		this.equipo = equipo;
+		if ( equipo == null) {
+			setTitle("Registro de Jugadores");
+		}else {
+			setTitle("Modificación de Jugadores");
+		}
 		setBounds(100, 100, 450, 256);
 		setLocationRelativeTo(null);
 		setModal(true);
@@ -106,8 +112,13 @@ public class RegEquipo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
-				okButton.addActionListener(new ActionListener() {
+				JButton btnRegistrar = new JButton("");
+				if ( equipo == null ) {
+					btnRegistrar.setText("Registrar");
+				}else {
+					btnRegistrar.setText("Modificar");
+				}
+				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							String nombre = txtNombre.getText().toString();
@@ -120,6 +131,11 @@ public class RegEquipo extends JDialog {
 							}
 							Equipo equipo = new Equipo(nombre, entrenador, presupuesto, estadio, iD);
 							Conferencia.getInstance().insertEquipo(equipo);
+							for (int ind = 0; ind < Conferencia.getInstance().getEquipos().size(); ind++) {
+								System.out.println(Conferencia.getInstance().getEquipos().get(ind).getNombre() + ' ' 
+										+ Conferencia.getInstance().getEquipos().get(ind).getiD()+ ' ' + Conferencia.getInstance().getEquipos().get(ind).getEntrenador()
+										+ "  " +Conferencia.getInstance().getEquipos().size());
+							}
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria.", "Información", JOptionPane.INFORMATION_MESSAGE);
 							clear();
 						} catch (Exception e2) {
@@ -128,9 +144,9 @@ public class RegEquipo extends JDialog {
 						}
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Salir");

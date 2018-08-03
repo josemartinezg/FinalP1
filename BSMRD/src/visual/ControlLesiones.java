@@ -33,6 +33,9 @@ public class ControlLesiones extends JDialog {
 	private JTextField txtID;
 	JComboBox cbxTiempoDeDesahibilitado;
 	private Jugador jugador;
+	private String descripcion;
+	private String tiempoLesionado;
+	
 	public ControlLesiones(Jugador jugador, DefaultComboBoxModel modelLesion, String tipoLesion) {
 		this.jugador = jugador;
 		setTitle("Control de Lesiones");
@@ -169,14 +172,20 @@ public class ControlLesiones extends JDialog {
 							int year = Integer.valueOf(cbxAnno.getSelectedItem().toString());
 							FechaSimple fechaInicio = new FechaSimple(day, month, year);
 							FechaSimple fechaRegreso = calcFechaRegreso(day, month, year);
-							String descripcion = txtDescripcion.getText().toString();
+							descripcion = txtDescripcion.getText().toString();
 							int gradoLesion = calcGradoLesion(tipoLes);
-							String tiempoLesionado = cbxTiempoDeDesahibilitado.getSelectedItem().toString();
+							tiempoLesionado = cbxTiempoDeDesahibilitado.getSelectedItem().toString();
+							
+							if (!(descripcion.equalsIgnoreCase("") || tiempoLesionado.equalsIgnoreCase(""))){
 							Lesion nuevaLesion = new Lesion(tipoLes, gradoLesion, fechaInicio, tiempoLesionado , fechaRegreso, descripcion, true);
 							txtFechaRegreso.setText(String.valueOf(fechaRegreso.getDay())+ "/"+String.valueOf(fechaRegreso.getMonth())+ "/"+ String.valueOf(fechaRegreso.getYear()));
+							
 							System.out.println(tipoLes + "\n" + String.valueOf(gradoLesion) + "\n" + day+"/"+month+"/"+year + "\n" +
 									fechaRegreso.getDay()+"/"+ fechaRegreso.getMonth() +"/"+ fechaRegreso.getYear() + "\n" + tiempoLesionado  +"\n"  + "\n\n" + descripcion);	
-							JOptionPane.showMessageDialog(null, "Jugador registrado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "La lesión registrada con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE, null);
+							 }else {
+								 JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
+							 }
 						}else {
 							System.out.println("Error! Numeros no van en la fecha...");
 							JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
@@ -254,7 +263,13 @@ public class ControlLesiones extends JDialog {
 				JButton btnSalir = new JButton("Salir");
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						if ( !(cbxDias.getSelectedItem().toString().equalsIgnoreCase("DD") || cbxMes.getSelectedItem().toString().equalsIgnoreCase("MM")
+								|| cbxAnno.getSelectedItem().toString().equalsIgnoreCase("AAAA")) || !(descripcion.equalsIgnoreCase("") || tiempoLesionado.equalsIgnoreCase(""))) {
+							dispose();
+						}else {
+							JOptionPane.showMessageDialog(null, "La Lesión no pudo ser creada por la fecha.\nVerifique los campos Obligatorios.", "Informacion", JOptionPane.WARNING_MESSAGE, null);
+						}
+						
 					}
 				});
 				btnSalir.setActionCommand("Cancel");

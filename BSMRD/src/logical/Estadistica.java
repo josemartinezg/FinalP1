@@ -11,8 +11,9 @@ public class Estadistica {
 	private int intentosTirosLibres;
 	private int intentosDeCampo;
 	private int intentosDeTres;
+	private int juegosJugados;
 	
-	//Añadir foto. 
+	//AÃ±adir foto. 
 	
 	public Estadistica() {
 		super();
@@ -24,6 +25,7 @@ public class Estadistica {
 		intentosTirosLibres = 0;
 		intentosDeCampo = 0;
 		intentosDeTres = 0;
+		juegosJugados = 0;
 	}
 
 	public int getTirosLibres() {
@@ -58,13 +60,23 @@ public class Estadistica {
 	public int getIntentosDeTres() {
 		return intentosDeTres;
 	}
+
+	public int getJuegosJugados() {
+		return juegosJugados;
+	}
+
+	public void setJuegosJugados(int juegosJugados) {
+		this.juegosJugados = juegosJugados;
+	}
 	/*
-	 * Llamar desde pantalla del tablero o simulación del juego.
+	 * Llamar desde pantalla del tablero o simulaciÃ³n del juego.
 	 * Condicionar los action listeners de acuerdo a las teclas. Ej: Si se asigna una tecla a tiro libre...
 	 * ... "addPuntos(1, T/F)".  
-	 * Agregar estructura de control al momento de invocar la función.
+	 * Agregar estructura de control al momento de invocar la funciÃ³n.
 	 * */
 	
+
+
 	//TODO Probar enviandole datos directamente al constructor.
 	public float addTiro(int anotacion, boolean encestado) {
 		float porcentaje = 0;
@@ -106,22 +118,32 @@ public class Estadistica {
 		return porcentaje;
 	}
 	
-	//Determinar si estos métodos son necesarios en esta clase...
-	/*Llamar método por teclado al momento de que se realice una asistencia.*/
+	//Determinar si estos mÃ©todos son necesarios en esta clase...
+	/*Llamar mÃ©todo por teclado al momento de que se realice una asistencia.*/
 	public void addAsistencias() {
 		asistencias += 1;
 	}
-	/*Llamar método por teclado al momento de que se realice un rebote.*/
+	/*Llamar mÃ©todo por teclado al momento de que se realice un rebote.*/
 	public void addRebotes() {
 		rebotes += 1;
 	}
 	public int puntosPorJuego(int cantJuegos) {
-		int promedio = totalPuntos/cantJuegos;
+		int promedio = 0;
+		if (cantJuegos != 0) {
+			promedio = totalPuntos/cantJuegos;
+		}else {
+			promedio = 0;
+		}
 		return promedio;
 	}
 	
 	public float calcAnotacionesPorJuego(int anotacion, int juegosJugados) {
 		float anotacionPorJuego = anotacion/juegosJugados;
+		if (anotacion != 0 || juegosJugados != 0) {
+			anotacionPorJuego = anotacion/juegosJugados;
+		}else {
+			anotacionPorJuego = 0;
+		}
 		return anotacionPorJuego;
 	}
 	/*

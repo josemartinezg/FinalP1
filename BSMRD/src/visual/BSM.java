@@ -3,10 +3,17 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.InputStream;
+
+import javax.swing.AbstractListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
@@ -20,9 +27,12 @@ import logical.Conferencia;
 import logical.Juego;
 import logical.Jugador;
 
+
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 public class BSM extends JFrame {
 
@@ -231,7 +241,7 @@ public class BSM extends JFrame {
 	    mntmRegistrarEquipo = new JMenuItem("Registrar equipo");
 	    mntmRegistrarEquipo.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		RegEquipo regEquipo = new RegEquipo();
+	    		RegEquipo regEquipo = new RegEquipo(null);
 	    		regEquipo.setVisible(true);
 	    	}
 	    });
@@ -245,6 +255,12 @@ public class BSM extends JFrame {
 	    panelA.add(mntmRegistrarEquipo);
 	    
 	    mntmListarEquipo = new JMenuItem("Listar equipos");
+	    mntmListarEquipo.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		VerEquipos verEquipos = new VerEquipos();
+	    		verEquipos.setVisible(true);
+	    	}
+	    });
 	    mntmListarEquipo.setForeground(new Color(255, 255, 255));
 	    mntmListarEquipo.setFont(new Font("Segoe UI", Font.BOLD, 20));
 	    mntmListarEquipo.setOpaque(false);
@@ -271,6 +287,12 @@ public class BSM extends JFrame {
 	    panelA.add(mntmRegistrarJugador);
 	    
 	    mntmListarJugador = new JMenuItem("Listar jugadores");
+	    mntmListarJugador.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		VerJugadores verJugadores = new VerJugadores();
+	    		verJugadores.setVisible(true);
+	    	}
+	    });
 	    mntmListarJugador.setForeground(new Color(255, 255, 255));
 	    mntmListarJugador.setFont(new Font("Segoe UI", Font.BOLD, 20));
 	    mntmListarJugador.setOpaque(false);

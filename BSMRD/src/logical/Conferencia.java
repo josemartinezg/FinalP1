@@ -193,6 +193,28 @@ public class Conferencia {
 		}
 		return aux;
 	}
+	
+	public ArrayList<Jugador> sortByLastName() {
+		ArrayList<Jugador> aux = misJugadores;
+		Collections.sort(aux, new Comparator() {
+			public int compare(Object j1, Object j2) {
+				String asist1 = ((Jugador) j1).getApellido();
+				String asist2 = ((Jugador) j2).getApellido();
+				return asist1.compareTo(asist2);
+			}
+		});
+		return aux;
+	}
+	
+	public ArrayList<Jugador> getTeamMembers(String team) {
+		ArrayList<Jugador> aux = new ArrayList<>();
+		for (int i = 0; i < misJugadores.size(); i++) {
+			if(misJugadores.get(i).getEquipo().equalsIgnoreCase(team)) {
+				aux.add(misJugadores.get(i));
+			}
+		}
+		return aux;
+	}
 
 }
 
